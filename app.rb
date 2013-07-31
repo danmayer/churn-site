@@ -53,11 +53,11 @@ post '/' do
   if project = Project.get_project(project_name)
     project.update(push['repository'])
     project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project, commit)
+    forward_to_deferred_server(project.name, commit)
   else
     project = Project.add_project(project_name, push['repository'])
     project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project, commit)
+    forward_to_deferred_server(project.name, commit)
   end
 end
 
