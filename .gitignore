@@ -1,0 +1,10 @@
+.rvmrc
+#I want a way to add the directory and one file, but ignore all files inside the directory
+tmp/**
+web/tmp/**
+api/tmp/**
+log/sinatra.log
+web/log/*
+api/log/*
+.yardoc/
+!.gitignore
