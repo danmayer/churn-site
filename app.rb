@@ -27,8 +27,13 @@ get '/' do
   erb :index
 end
 
+get '/*/commits/*' do |project_path, commit|
+  @project      = Project.get_project(project_path)
+  @commit       = nil
+  erb :commit
+end
+
 get '/*' do |project_path|
-  @projects     = Project.projects
   @project      = Project.get_project(project_path)
   erb :project
 end

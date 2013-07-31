@@ -1,0 +1,8 @@
+<h3>Project name: <%= @project.name %></h3>
+<h5>commit</h5>
+
+<ul>
+  <% @project.commits.each do |commit| %>
+    <li><a href='/<%= @project.name %>/commits/<%= commit %>'><%= commit %></a></li>
+  <% end %>
+</ul>
