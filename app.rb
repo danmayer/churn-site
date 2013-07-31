@@ -17,7 +17,7 @@ end
 
 before /.*/ do
   if request.host.match(/herokuapp.com/)
-    redirect request.url.gsub("herokuapp.com",'picoappz.com'), 301
+    redirect request.url.gsub("herokuapp.com",'picoappz.com').gsub(/churn-site\./,'curn'), 301
   end
 end
 
