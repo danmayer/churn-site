@@ -30,7 +30,7 @@ end
 post '/' do
   push = JSON.parse(params['payload'])
   project_name = push['repository']['name']
-  Projects.add_project(project_name)
+  Project.add_project(project_name)
 end
 
 private
