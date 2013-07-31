@@ -32,6 +32,14 @@ class Commit
     @data = JSON.parse(data)
   end
 
+  def name
+    @commit
+  end
+
+  def data
+    @data
+  end
+
   def update(data)
     REDIS.hset(commits_key(@project_name), @commit, data.to_json)
     @data = JSON.parse(data.to_json)

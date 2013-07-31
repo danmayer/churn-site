@@ -29,7 +29,7 @@ end
 
 get '/*/commits/*' do |project_path, commit|
   @project      = Project.get_project(project_path)
-  @commit       = nil
+  @commit       = Commit.get_commit(@project.name, commit)
   erb :commit
 end
 
