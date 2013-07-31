@@ -7,6 +7,25 @@
 
 <h5>Churn</h5>
 
-<pre>
-  <%= @commit.churn_results %>
-</pre>
+<% if @commit.churn_results.is_a?(String) %>
+  <pre>
+<%= @commit.churn_results %>
+  </pre>
+<% else %>
+  <% @run_results = @commit.churn_results %>
+  <% if @run_results['cmd_run'] %>
+  <p>
+    <strong>command run:</strong> <code><%= @run_results['cmd_run'] %></code>
+  </p>
+  <% end %>
+
+  <% if @run_results['exit_status'] %>
+  <p>
+    <strong>command exit status:</strong> <code><%= @run_results['exit_status'] %></code>
+  </p>
+  <% end %>
+
+  <pre>
+<%= @run_results['results'] %>
+  </pre>
+<% end %>

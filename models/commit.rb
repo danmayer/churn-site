@@ -44,7 +44,11 @@ class Commit
   def churn_results
     filename = "project_results/results_for_#{@project_name}_#{@commit}_churn"
     churn_data = get_file(filename)
-    churn_data || 'churn results missing'
+    if churn_data && churn_data!=''
+      JSON.parse(churn_data)
+    else
+      'churn results missing'
+    end
   end
 
   def update(data)
