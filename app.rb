@@ -29,7 +29,8 @@ end
 
 post '/' do
   push = JSON.parse(params['payload'])
-  project_name = push['repository']['name']
+  project_url = push['repository']['url']
+  project_name = project_url.gsub(/.*com\//,'')
   Project.add_project(project_name)
 end
 
