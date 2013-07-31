@@ -9,6 +9,10 @@ class Project
     REDIS.hset(PROJECTS_KEY, name, 'url')
   end
 
+  def self.remove_project(name)
+    REDIS.hdel(PROJECTS_KEY, name)
+  end
+
   def self.get_project(name)
     REDIS.hget(PROJECTS_KEY, name)
   end
