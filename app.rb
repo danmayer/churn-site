@@ -15,6 +15,12 @@ use Rack::Flash, :sweep => true
 helpers do
 end
 
+before /.*/ do
+  if request.host.match(/herokuapp.com/)
+    redirect request.url.gsub("herokuapp.com",'picoappz.com'), 301
+  end
+end
+
 get '/' do
   @projects      = Project.projects
   flash[:notice] = "your up and running"
