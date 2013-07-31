@@ -6,6 +6,7 @@ gem 'rack-flash3'
 gem 'redis'
 gem 'rest-client'
 gem 'addressable'
+gem 'fog'
 
 # Prevent installation on Heroku with
 # heroku config:add BUNDLE_WITHOUT="development:test"

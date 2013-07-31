@@ -11,7 +11,8 @@ module ServerFiles
     begin
       file = directory.files.get(filename)
       file.body
-    rescue
+    rescue => error
+      puts "error getting file #{error}"
       ''
     end
   end
