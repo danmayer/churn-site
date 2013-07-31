@@ -10,7 +10,7 @@ class Commit
   end
 
   def self.add_commit(project_name, commit, data)
-    REDIS.hset(commits_key(project_name), commit, data)
+    REDIS.hset(commits_key(project_name), commit, data.to_json)
   end
 
   def self.remove_commit(project_name, commit)
@@ -33,8 +33,8 @@ class Commit
   end
 
   def update(data)
-    REDIS.hset(commits_key(@project_name), @commit, data)
-    @data = JSON.parse(data)
+    REDIS.hset(commits_key(@project_name), @commit, data.to_json)
+    @data = JSON.parse(data.to_json)
   end
 
   private

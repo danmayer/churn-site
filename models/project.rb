@@ -6,7 +6,7 @@ class Project
   end
 
   def self.add_project(name, data)
-    REDIS.hset(REDIS_KEY, name, data)
+    REDIS.hset(REDIS_KEY, name, data.to_json)
     Project.new(name, project_data)
   end
 
@@ -23,7 +23,7 @@ class Project
     end
   end
 
-  def initialize(name, data = nil)
+  def initialize(name, data)
     @name = name
     @data = JSON.parse(data)
   end
@@ -33,8 +33,8 @@ class Project
   end
 
   def update(data)
-    REDIS.hset(REDIS_KEY, @name, data)
-    @data = JSON.parse(data)
+    REDIS.hset(REDIS_KEY, @name, data.to_json)
+    @data = JSON.parse(data.to_json)
   end
 
   def commits
