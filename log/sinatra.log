@@ -1,0 +1,418 @@
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [14/Oct/2012 11:34:29] "GET / HTTP/1.1" 200 130 0.0408
+127.0.0.1 - - [14/Oct/2012 11:34:40] "GET /favicon.ico HTTP/1.1" 404 447 0.0256
+127.0.0.1 - - [14/Oct/2012 11:34:52] "GET /last_job HTTP/1.1" 200 46 0.0021
+127.0.0.1 - - [14/Oct/2012 11:34:52] "GET /favicon.ico HTTP/1.1" 404 447 0.0013
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
+>> Stopping ...
+>> Stopping ...
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+NameError - undefined local variable or method `username' for #<Sinatra::Application:0x108c6aaf8>:
+	/Users/danmayer/projects/server-responder/views/layout.erb:29:in `evaluate_source'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/tilt-1.3.3/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/tilt-1.3.3/lib/tilt/template.rb:127:in `evaluate'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/tilt-1.3.3/lib/tilt/template.rb:76:in `render'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:686:in `render'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:694:in `render'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:694:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:694:in `render'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:572:in `erb'
+	./server_responder.rb:25:in `GET /'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1264:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1264:in `compile!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `[]'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:851:in `route_eval'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:872:in `process_route'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:870:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:870:in `process_route'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:834:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:833:in `each'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:833:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:936:in `dispatch!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:769:in `call!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `invoke'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `invoke'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:769:in `call!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:755:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/xss_header.rb:22:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/json_csrf.rb:17:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/base.rb:47:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/xss_header.rb:22:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/logger.rb:15:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call_without_check'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:136:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:129:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/head.rb:9:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/showexceptions.rb:21:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:99:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1389:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1471:in `synchronize'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1389:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:81:in `pre_process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:79:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:79:in `pre_process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:54:in `process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:39:in `receive_data'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+127.0.0.1 - - [22/Oct/2012 20:07:06] "GET /__sinatra__/500.png HTTP/1.1" 200 31056 0.0309
+127.0.0.1 - - [22/Oct/2012 20:07:07] "GET /favicon.ico HTTP/1.1" 404 447 0.0010
+127.0.0.1 - - [22/Oct/2012 20:07:52] "GET / HTTP/1.1" 200 1438 0.0039
+127.0.0.1 - - [22/Oct/2012 20:07:52] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 404 459 0.0012
+127.0.0.1 - - [22/Oct/2012 20:07:52] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 469 0.0011
+127.0.0.1 - - [22/Oct/2012 20:07:52] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 471 0.0007
+127.0.0.1 - - [22/Oct/2012 20:07:52] "GET /favicon.ico HTTP/1.1" 404 447 0.0011
+127.0.0.1 - - [22/Oct/2012 20:08:34] "GET /favicon.ico HTTP/1.1" 404 447 0.0009
+127.0.0.1 - - [22/Oct/2012 20:08:37] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 404 459 0.0009
+127.0.0.1 - - [22/Oct/2012 20:08:37] "GET /__sinatra__/404.png HTTP/1.1" 200 23305 0.0221
+127.0.0.1 - - [22/Oct/2012 20:08:37] "GET /favicon.ico HTTP/1.1" 404 447 0.0008
+127.0.0.1 - - [22/Oct/2012 20:09:32] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 200 94839 0.0036
+127.0.0.1 - - [22/Oct/2012 20:09:32] "GET /favicon.ico HTTP/1.1" 404 447 0.0010
+127.0.0.1 - - [22/Oct/2012 20:09:36] "GET / HTTP/1.1" 200 1438 0.0043
+127.0.0.1 - - [22/Oct/2012 20:09:36] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 304 - 0.0009
+127.0.0.1 - - [22/Oct/2012 20:09:36] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 25526 0.0010
+127.0.0.1 - - [22/Oct/2012 20:09:36] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 95583 0.0010
+127.0.0.1 - - [22/Oct/2012 20:09:36] "GET /favicon.ico HTTP/1.1" 404 447 0.0009
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [25/Oct/2012 21:28:00] "GET / HTTP/1.1" 200 6011 0.1024
+127.0.0.1 - - [25/Oct/2012 21:28:00] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 200 94839 0.0181
+127.0.0.1 - - [25/Oct/2012 21:28:00] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 25526 0.0209
+127.0.0.1 - - [25/Oct/2012 21:28:00] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 95583 0.0292
+127.0.0.1 - - [25/Oct/2012 21:28:00] "GET /favicon.ico HTTP/1.1" 404 447 0.0011
+127.0.0.1 - - [25/Oct/2012 21:28:54] "GET / HTTP/1.1" 200 6061 0.0228
+127.0.0.1 - - [25/Oct/2012 21:28:54] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 304 - 0.0009
+127.0.0.1 - - [25/Oct/2012 21:28:54] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [25/Oct/2012 21:28:54] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [25/Oct/2012 21:28:54] "GET /favicon.ico HTTP/1.1" 404 447 0.0012
+127.0.0.1 - - [25/Oct/2012 21:30:47] "GET / HTTP/1.1" 200 5955 0.0168
+127.0.0.1 - - [25/Oct/2012 21:30:47] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 304 - 0.0008
+127.0.0.1 - - [25/Oct/2012 21:30:47] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [25/Oct/2012 21:30:47] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [25/Oct/2012 21:30:47] "GET /favicon.ico HTTP/1.1" 404 447 0.0016
+127.0.0.1 - - [25/Oct/2012 21:31:14] "GET / HTTP/1.1" 200 5812 0.0168
+127.0.0.1 - - [25/Oct/2012 21:31:14] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 304 - 0.0008
+127.0.0.1 - - [25/Oct/2012 21:31:14] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 304 - 0.0007
+127.0.0.1 - - [25/Oct/2012 21:31:14] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [25/Oct/2012 21:31:15] "GET /favicon.ico HTTP/1.1" 404 447 0.0016
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [25/Oct/2012 21:44:14] "GET / HTTP/1.1" 200 5812 0.0238
+127.0.0.1 - - [25/Oct/2012 21:44:14] "GET /favicon.ico HTTP/1.1" 404 447 0.0010
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_tcp_server': no acceptor (port is in use or requires root privileges) (RuntimeError)
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:526:in `start_server'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/tcp_server.rb:16:in `connect'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:55:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `call'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	from /Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [28/Oct/2012 12:03:20] "GET / HTTP/1.1" 200 6219 0.1396
+127.0.0.1 - - [28/Oct/2012 12:03:20] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 200 94839 0.0315
+127.0.0.1 - - [28/Oct/2012 12:03:20] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 25526 0.0030
+127.0.0.1 - - [28/Oct/2012 12:03:20] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 95583 0.0154
+127.0.0.1 - - [28/Oct/2012 12:03:21] "GET /favicon.ico HTTP/1.1" 404 447 0.0052
+NoMethodError - undefined method `present?' for "puts 4+5":String:
+	./server_responder.rb:92:in `POST /'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1264:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1264:in `compile!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `[]'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:851:in `route_eval'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:835:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:872:in `process_route'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:870:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:870:in `process_route'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:834:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:833:in `each'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:833:in `route!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:936:in `dispatch!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:769:in `call!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `invoke'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:921:in `invoke'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:769:in `call!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:755:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/xss_header.rb:22:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/json_csrf.rb:17:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/base.rb:47:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-protection-1.2.0/lib/rack/protection/xss_header.rb:22:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/logger.rb:15:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/commonlogger.rb:20:in `call_without_check'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:136:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:129:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/head.rb:9:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/showexceptions.rb:21:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:99:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1389:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1471:in `synchronize'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/sinatra-1.3.3/lib/sinatra/base.rb:1389:in `call'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:81:in `pre_process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:79:in `catch'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:79:in `pre_process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:54:in `process'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/connection.rb:39:in `receive_data'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run_machine'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/eventmachine-1.0.0/lib/eventmachine.rb:187:in `run'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/backends/base.rb:63:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/server.rb:159:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `send'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:187:in `run_command'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/lib/thin/runner.rb:152:in `run!'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/gems/thin-1.5.0/bin/thin:6
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19:in `load'
+	/Users/danmayer/.rvm/gems/ree-1.8.7-2011.03@server-responder/bin/thin:19
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [28/Oct/2012 12:06:30] "POST / HTTP/1.1" 200 1274 1.5756
+127.0.0.1 - - [28/Oct/2012 12:06:47] "GET / HTTP/1.1" 200 6315 0.0458
+127.0.0.1 - - [28/Oct/2012 12:06:47] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 304 - 0.0024
+127.0.0.1 - - [28/Oct/2012 12:06:47] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 304 - 0.0006
+127.0.0.1 - - [28/Oct/2012 12:06:47] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 - 0.0005
+127.0.0.1 - - [28/Oct/2012 12:06:48] "GET /favicon.ico HTTP/1.1" 404 447 0.0024
+127.0.0.1 - - [28/Oct/2012 12:15:30] "POST / HTTP/1.1" 200 1274 0.9859
+127.0.0.1 - - [28/Oct/2012 12:15:42] "POST / HTTP/1.1" 200 1274 0.9135
+127.0.0.1 - - [28/Oct/2012 12:16:08] "POST / HTTP/1.1" 200 1274 0.8889
+127.0.0.1 - - [28/Oct/2012 12:16:14] "POST / HTTP/1.1" 200 1274 0.9667
+127.0.0.1 - - [28/Oct/2012 12:16:16] "POST / HTTP/1.1" 200 1274 0.9530
+127.0.0.1 - - [28/Oct/2012 12:16:39] "POST / HTTP/1.1" 200 1274 0.8957
+127.0.0.1 - - [28/Oct/2012 12:16:41] "POST / HTTP/1.1" 200 1274 0.9443
+127.0.0.1 - - [28/Oct/2012 12:16:50] "POST / HTTP/1.1" 200 1274 1.0153
+127.0.0.1 - - [28/Oct/2012 12:16:52] "POST / HTTP/1.1" 200 1274 1.4967
+127.0.0.1 - - [28/Oct/2012 12:17:23] "POST / HTTP/1.1" 200 1274 0.8466
+127.0.0.1 - - [28/Oct/2012 12:17:35] "POST / HTTP/1.1" 200 1274 0.8918
+127.0.0.1 - - [28/Oct/2012 12:17:48] "POST / HTTP/1.1" 200 1274 0.9447
+127.0.0.1 - - [28/Oct/2012 12:18:02] "POST / HTTP/1.1" 200 1274 0.8520
+127.0.0.1 - - [28/Oct/2012 12:18:54] "POST / HTTP/1.1" 200 1274 0.9728
+127.0.0.1 - - [28/Oct/2012 12:18:56] "POST / HTTP/1.1" 200 1274 0.8486
+127.0.0.1 - - [28/Oct/2012 12:18:58] "POST / HTTP/1.1" 200 1274 0.8427
+127.0.0.1 - - [28/Oct/2012 12:19:05] "POST / HTTP/1.1" 200 1274 1.2967
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:23:54] "POST / HTTP/1.1" 200 1274 1.3616
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:24:08] "POST / HTTP/1.1" 200 1274 0.8433
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:25:39] "POST / HTTP/1.1" 200 1274 0.5702
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:28:21] "POST / HTTP/1.1" 200 1274 0.5480
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:28:30] "POST / HTTP/1.1" 200 1274 0.5850
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:28:38] "POST / HTTP/1.1" 200 1274 0.7387
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:30:21] "POST / HTTP/1.1" 200 1274 0.6076
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:30:57] "POST / HTTP/1.1" 200 1274 1.3023
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+I, [2012-10-28T12:32:11.219942 #20169]  INFO -- : running: puts "code from ruby #{4+5}"
+-e:1: undefined local variable or method `code' for main:Object (NameError)
+127.0.0.1 - - [28/Oct/2012 12:32:12] "POST / HTTP/1.1" 200 1274 0.9980
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+I, [2012-10-28T12:37:18.942887 #20200]  INFO -- : running: puts \"code from ruby #{4+5}\"
+127.0.0.1 - - [28/Oct/2012 12:37:19] "POST / HTTP/1.1" 200 1274 0.9905
+I, [2012-10-28T12:39:50.530340 #20200]  INFO -- : running: puts \"code from ruby #{4+5}\"
+127.0.0.1 - - [28/Oct/2012 12:39:51] "POST / HTTP/1.1" 200 1274 1.2948
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+127.0.0.1 - - [28/Oct/2012 12:44:55] "POST / HTTP/1.1" 200 11 0.0027
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+>> Stopping ...
+I, [2012-10-28T12:49:37.833591 #20275]  INFO -- : running: puts \"code from ruby #{4+5}\"
+127.0.0.1 - - [28/Oct/2012 12:49:39] "POST /?api_token=thisisasecretapikey HTTP/1.1" 200 1274 1.6946
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3001, CTRL+C to stop
+!! Invalid request
+>> Stopping ...
+127.0.0.1 - - [27/Dec/2012 12:07:35] "GET / HTTP/1.1" 200 6457 0.1675
+127.0.0.1 - - [27/Dec/2012 12:07:35] "GET /lib/jquery-1.7.2.min.js HTTP/1.1" 200 94839 0.0194
+127.0.0.1 - - [27/Dec/2012 12:07:35] "GET /lib/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 25526 0.0019
+127.0.0.1 - - [27/Dec/2012 12:07:35] "GET /lib/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 95583 0.0150
+127.0.0.1 - - [27/Dec/2012 12:07:35] "GET /favicon.ico HTTP/1.1" 404 447 0.0012
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+>> Stopping ...
