@@ -29,8 +29,7 @@ end
 
 get '/*' do |project_path|
   @projects     = Project.projects
-  @project = Project.get_project(project_path)
-  @commits      = Commit.commits(@project_name)
+  @project      = Project.get_project(project_path)
   erb :project
 end
 
