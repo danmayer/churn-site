@@ -5,6 +5,7 @@ require 'rack-flash'
 require 'redis'
 require './lib/redis_initializer'
 require './models/project'
+require './models/commit'
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
@@ -28,7 +29,8 @@ end
 
 get '/*' do |project_path|
   @projects     = Project.projects
-  @project_path = project_path 
+  @project = Project.get_project(project_path)
+  @commits      = Commit.commits(@project_name)
   erb :project
 end
 
@@ -36,7 +38,15 @@ post '/' do
   push = JSON.parse(params['payload'])
   project_url = push['repository']['url']
   project_name = project_url.gsub(/.*com\//,'')
-  Project.add_project(project_name)
+  commit = push['after']
+  commit_data = push['commits'].detect{|a_commit| a_commit['id']==commit }
+  if project = Project.get_project(project_name)
+    project.update(push['repository'])
+    project.add_commit(commit, commit_data)
+  else
+    project = Project.add_project(project_name, push['repository'])
+    project.add_commit(commit, commit_data)
+  end
 end
 
 private
