@@ -17,14 +17,19 @@ end
 
 before /.*/ do
   if request.host.match(/herokuapp.com/)
-    redirect request.url.gsub("herokuapp.com",'picoappz.com').gsub(/churn-site\./,'curn.'), 301
+    redirect request.url.gsub("churn-site.herokuapp.com",'churn.picoappz.com'), 301
   end
 end
 
 get '/' do
   @projects      = Project.projects
-  flash[:notice] = "your up and running"
   erb :index
+end
+
+get '/*' do |project_path|
+  @projects     = Project.projects
+  @project_path = project_path 
+  erb :project
 end
 
 post '/' do
