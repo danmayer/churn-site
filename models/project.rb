@@ -7,7 +7,7 @@ class Project
 
   def self.add_project(name, data)
     REDIS.hset(REDIS_KEY, name, data.to_json)
-    Project.new(name, project_data)
+    Project.new(name, data)
   end
 
   def self.remove_project(name)
