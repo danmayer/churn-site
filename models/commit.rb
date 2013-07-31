@@ -44,9 +44,6 @@ class Commit
     "churn"
   end
 
-  def generate_churn_results
-  end
-
   def update(data)
     REDIS.hset(commits_key(@project_name), @commit, data.to_json)
     @data = JSON.parse(data.to_json)

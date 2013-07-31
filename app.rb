@@ -53,9 +53,11 @@ post '/' do
   if project = Project.get_project(project_name)
     project.update(push['repository'])
     project.add_commit(commit, commit_data)
+    forward_to_deferred_server(project, commit)
   else
     project = Project.add_project(project_name, push['repository'])
     project.add_commit(commit, commit_data)
+    forward_to_deferred_server(project, commit)
   end
 end
 
@@ -73,17 +75,14 @@ end
 private
 
 def forward_to_deferred_server(project, commit)
-  uri = Addressable::URI.new
-  uri.query_values = request.params.merge('deferred_request' => true)
-  request_endpoint = "#{request.path}?#{uri.query}"
-  
   resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
                                       :timeout => 18, 
                                       :open_timeout => 10)
   
   resource.post(:signature => DEFERRED_SERVER_TOKEN,
-                :project => @project.name,
-                :project_commit => request_endpoint)
+                :project => project.name,
+                :commit => commit.name,
+                :command => 'churn')
 rescue RestClient::RequestTimeout
   puts "timed out during deferred-server hit"
 end
