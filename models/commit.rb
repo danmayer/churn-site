@@ -1,4 +1,5 @@
 class Commit
+  include ServerFiles
   REDIS_KEY = 'churn-commits'
 
   def self.commits_key(project_name)
@@ -41,7 +42,9 @@ class Commit
   end
 
   def churn_results
-    "churn"
+    filename = "project_results/results_for_#{@project_name}_#{@commit}_churn"
+    churn_data = get_file(filename)
+    churn_data || 'churn results missing'
   end
 
   def update(data)

@@ -7,6 +7,7 @@ require 'rest-client'
 require 'open-uri'
 require 'addressable/uri'
 require './lib/redis_initializer'
+require './lib/server-files'
 require './models/project'
 require './models/commit'
 
