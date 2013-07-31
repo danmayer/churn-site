@@ -65,7 +65,7 @@ post '/churn/*/commits/*' do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
   if @project && @commit
-    forward_to_deferred_server(@project, @commit)
+    forward_to_deferred_server(@project.name, @commit.name)
   else
     status 404
     body "project or commit doesn't exist!"
@@ -80,8 +80,8 @@ def forward_to_deferred_server(project, commit)
                                       :open_timeout => 10)
   
   resource.post(:signature => DEFERRED_SERVER_TOKEN,
-                :project => project.name,
-                :commit => commit.name,
+                :project => project,
+                :commit => commit,
                 :command => 'churn')
 rescue RestClient::RequestTimeout
   puts "timed out during deferred-server hit"
