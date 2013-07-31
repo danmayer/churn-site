@@ -4,6 +4,8 @@ gem 'sinatra'
 gem 'json'
 gem 'rack-flash3'
 gem 'redis'
+gem 'rest-client'
+gem 'addressable'
 
 # Prevent installation on Heroku with
 # heroku config:add BUNDLE_WITHOUT="development:test"

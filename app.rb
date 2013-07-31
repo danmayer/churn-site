@@ -3,9 +3,15 @@ require 'json'
 require 'fileutils'
 require 'rack-flash'
 require 'redis'
+require 'rest-client'
+require 'open-uri'
+require 'addressable/uri'
 require './lib/redis_initializer'
 require './models/project'
 require './models/commit'
+
+DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
+DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
@@ -53,4 +59,31 @@ post '/' do
   end
 end
 
+post '/churn/*/commits/*' do |project_path, commit|
+  @project      = Project.get_project(project_path)
+  @commit       = Commit.get_commit(@project.name, commit)
+  if @project && @commit
+    forward_to_deferred_server(@project, @commit)
+  else
+    status 404
+    body "project or commit doesn't exist!"
+  end
+end
+
 private
+
+def forward_to_deferred_server(project, commit)
+  uri = Addressable::URI.new
+  uri.query_values = request.params.merge('deferred_request' => true)
+  request_endpoint = "#{request.path}?#{uri.query}"
+  
+  resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
+                                      :timeout => 18, 
+                                      :open_timeout => 10)
+  
+  resource.post(:signature => DEFERRED_SERVER_TOKEN,
+                :project => @project.name,
+                :project_commit => request_endpoint)
+rescue RestClient::RequestTimeout
+  puts "timed out during deferred-server hit"
+end
