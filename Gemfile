@@ -10,13 +10,8 @@ gem 'redis'
 group :development, :test do
    gem 'rack-test'
    gem 'mocha'
-end
-
-if RbConfig::CONFIG['host_os'] =~ /darwin/
-  group :development do
-    gem 'shotgun'
-    gem 'pry'
-    gem 'leader', :git => 'git://github.com/halo/leader.git'
-    gem 'foreman'
-  end
+  gem 'shotgun'
+  gem 'pry'
+  gem 'leader', :git => 'git://github.com/halo/leader.git'
+  gem 'foreman'
 end
