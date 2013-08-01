@@ -16,7 +16,7 @@ class Commit
     commits.each do |commit|
       sorted_commits << get_commit(project_name, commit)
     end
-    sorted_commits.sort_by{|commit_a, commit_b| commit_a.commit_time < commit_b.commit_time }.compact
+    sorted_commits.compact.sort{|commit_a, commit_b| commit_b.commit_time <=> commit_a.commit_time }
   end
 
   def self.add_commit(project_name, commit, data)

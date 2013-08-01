@@ -8,3 +8,5 @@ web/log/*
 api/log/*
 .yardoc/
 !.gitignore
+Procfile.prod
+log/*
