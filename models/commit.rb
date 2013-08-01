@@ -10,6 +10,15 @@ class Commit
     REDIS.hkeys(commits_key(project_name))
   end
 
+  def self.get_sorted_commits_with_details(project_name)
+    commits = commits(project_name)
+    sorted_commits = []
+    commits.each do |commit|
+      sorted_commits << [get_commit(project_name, commit)]
+    end
+    sorted_commits.sort_by{|commit_a, commit_b| commit_a.commit_time < commit_b.commit_time }
+  end
+
   def self.add_commit(project_name, commit, data)
     REDIS.hset(commits_key(project_name), commit, data.to_json)
   end
@@ -39,6 +48,14 @@ class Commit
 
   def data
     @data
+  end
+
+  def commit_time
+    Time.parse(data['timestamp'])
+  end
+
+  def formatted_commit_time
+    commit_time.strftime("%m/%d/%Y at %I:%M%p")
   end
 
   def churn_results

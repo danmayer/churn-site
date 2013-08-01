@@ -40,6 +40,10 @@ class Project
   def commits
     Commit.commits(@name)
   end
+  
+  def sorted_commits
+    Commit.get_sorted_commits_with_details(@name)
+  end
 
   def add_commit(commit, data)
     Commit.add_commit(@name, commit, data)

@@ -1,7 +1,13 @@
 <h3>Project name: <%= @project.name %></h3>
 
 <ul>
-  <% @project.commits.each do |commit| %>
-    <li><a href='/<%= @project.name %>/commits/<%= commit %>'><%= commit %></a></li>
+  <% @project.sorted_commits.each do |commit| %>
+    <li>
+      <a href='/<%= @project.name %>/commits/<%= commit.name %>'>
+        <%= commit.name %>
+      </a>
+      (<%= commit.data['message'] %> @
+       <%= commit.formatted_commit_time %>)
+    </li>
   <% end %>
 </ul>
