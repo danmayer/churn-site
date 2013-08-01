@@ -14,7 +14,7 @@ class Commit
     commits = commits(project_name)
     sorted_commits = []
     commits.each do |commit|
-      sorted_commits << [get_commit(project_name, commit)]
+      sorted_commits << get_commit(project_name, commit)
     end
     sorted_commits.sort_by{|commit_a, commit_b| commit_a.commit_time < commit_b.commit_time }
   end
