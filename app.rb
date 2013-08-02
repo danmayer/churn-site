@@ -7,6 +7,7 @@ require 'rest-client'
 require 'open-uri'
 require 'addressable/uri'
 require 'fog'
+require 'octokit'
 require './lib/redis_initializer'
 require './lib/server-files'
 require './models/project'
@@ -52,11 +53,16 @@ end
 
 post '/projects/add' do
   project_name = params['project_name']
-  project_data = {}
-  commit = 'head'
-  commit_data = {}
-  find_or_create_project(project_name, project_data, commit, commit_data)
-  flash[:notice] = 'project created'
+  if project_name
+    project_data = Octokit.repo project_name
+    gh_commit = Octokit.commits(project_name).first
+    commit = gh_commit.first['sha']
+    commit_data = gh_commit
+    find_or_create_project(project_name, project_data, commit, commit_data)
+    flash[:notice] = 'project created'
+  else
+    flash[:notice] = 'project name required'
+  end
   redirect '/'
 end
 

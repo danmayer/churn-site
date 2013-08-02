@@ -52,9 +52,21 @@ class Commit
 
   def commit_time
     begin
-      Time.parse(data['timestamp'])
+      if data['timestamp']
+        Time.parse(data['timestamp'])
+      else
+        Time.parse(data['commit']['committer']['date'])
+      end
     rescue
       Time.now
+    end
+  end
+
+  def message
+    if data['message']
+      data['message']
+    else
+      data['commit']['message']
     end
   end
 
