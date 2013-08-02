@@ -43,7 +43,12 @@ end
 
 get '/*' do |project_path|
   @project      = Project.get_project(project_path)
-  erb :project
+  if @project
+    erb :project
+  else
+    flash[:error] = 'project not found'
+    halt redirect '/'
+  end
 end
 
 post '/projects/add' do
