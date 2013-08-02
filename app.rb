@@ -46,21 +46,22 @@ get '/*' do |project_path|
   erb :project
 end
 
+post '/projects/add' do
+  project_name = params['project_name']
+  project_data = {}
+  commit = 'head'
+  commit_data = {}
+  find_or_create_project(project_name, project_data, commit, commit_data)
+end
+
 post '/' do
   push = JSON.parse(params['payload'])
   project_url = push['repository']['url']
   project_name = project_url.gsub(/.*com\//,'')
+  project_data = push['repository']
   commit = push['after']
   commit_data = push['commits'].detect{|a_commit| a_commit['id']==commit }
-  if project = Project.get_project(project_name)
-    project.update(push['repository'])
-    project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project.name, commit)
-  else
-    project = Project.add_project(project_name, push['repository'])
-    project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project.name, commit)
-  end
+  find_or_create_project(project_name, project_data, commit, commit_data)
 end
 
 post '/churn/*/commits/*' do |project_path, commit|
@@ -75,6 +76,18 @@ post '/churn/*/commits/*' do |project_path, commit|
 end
 
 private
+
+def find_or_create_project(project_name, project_data, commit, commit_data)
+  if project = Project.get_project(project_name)
+    project.update(project_data)
+    project.add_commit(commit, commit_data)
+    forward_to_deferred_server(project.name, commit)
+  else
+    project = Project.add_project(project_name, project_data)
+    project.add_commit(commit, commit_data)
+    forward_to_deferred_server(project.name, commit)
+  end
+end
 
 def forward_to_deferred_server(project, commit)
   resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
