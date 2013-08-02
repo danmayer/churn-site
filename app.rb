@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'json'
 require 'fileutils'
-require 'rack-flash'
+require 'sinatra/flash'
 require 'redis'
 require 'rest-client'
 require 'open-uri'
@@ -19,7 +19,6 @@ set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
 enable :logging
 enable :sessions
-use Rack::Flash, :sweep => true
 
 helpers do
 end
@@ -47,7 +46,7 @@ get '/*' do |project_path|
     erb :project
   else
     flash[:error] = 'project not found'
-    halt redirect '/'
+    redirect '/'
   end
 end
 
@@ -57,7 +56,8 @@ post '/projects/add' do
   commit = 'head'
   commit_data = {}
   find_or_create_project(project_name, project_data, commit, commit_data)
-  halt redirect '/'
+  flash[:notice] = 'project created'
+  redirect '/'
 end
 
 post '/' do
