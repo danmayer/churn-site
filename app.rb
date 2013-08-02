@@ -56,7 +56,7 @@ post '/projects/add' do
   if project_name
     project_data = Octokit.repo project_name
     gh_commit = Octokit.commits(project_name).first
-    commit = gh_commit.first['sha']
+    commit = gh_commit['sha']
     commit_data = gh_commit
     find_or_create_project(project_name, project_data, commit, commit_data)
     flash[:notice] = 'project created'
