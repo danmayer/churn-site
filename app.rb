@@ -41,6 +41,23 @@ get '/*/commits/*' do |project_path, commit|
   erb :commit
 end
 
+post '/*/commits/*' do |project_path, commit|
+  @project      = Project.get_project(project_path)
+  @commit       = Commit.get_commit(@project.name, commit)
+  if @project && @commit
+    project_data = Octokit.repo project_name
+    gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
+    commit = gh_commit['sha']
+    commit_data = gh_commit
+    find_or_create_project(project_name, project_data, commit, commit_data)
+    flash[:notice] = 'project created'
+    redirect "/#{@project.name}/commits/#{@commit.name}"
+  else
+    flash[:error] = 'project or commit not found'
+    redirect '/'
+  end
+end
+
 get '/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project

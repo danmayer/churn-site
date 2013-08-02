@@ -1,6 +1,20 @@
 <h3>Project name: <%= @project.name %></h3>
 <h5>commit: <%= @commit.name %></h5>
 
+Actions:
+<ul>
+  <li>
+   <a href="http://github.com/<%= @project.name %>">
+     view <%= @project.name %> on github
+   </a>
+  </li>
+  <li>
+    <form action="/<%= @project.name %>/commits/<%= @commit.name %>" method="post">
+      <input type="submit" name="submit" value="re-churn commit" class="button stacked" />
+    </form>
+  </li>
+
+
 <pre>
   <%= @commit.data.inspect %>
 </pre>
