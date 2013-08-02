@@ -52,6 +52,7 @@ post '/projects/add' do
   commit = 'head'
   commit_data = {}
   find_or_create_project(project_name, project_data, commit, commit_data)
+  halt redirect '/'
 end
 
 post '/' do
