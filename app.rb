@@ -50,7 +50,7 @@ post '/*/commits/*' do |project_name, commit|
     commit = gh_commit['sha']
     commit_data = gh_commit
     find_or_create_project(project_name, project_data, commit, commit_data)
-    flash[:notice] = 'project created'
+    flash[:notice] = 'project rechurning'
     redirect "/#{@project.name}/commits/#{@commit.name}"
   else
     flash[:error] = 'project or commit not found'
