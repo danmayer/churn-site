@@ -51,7 +51,11 @@ class Commit
   end
 
   def commit_time
-    Time.parse(data['timestamp'])
+    begin
+      Time.parse(data['timestamp'])
+    rescue
+      Time.now
+    end
   end
 
   def formatted_commit_time
