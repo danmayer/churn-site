@@ -41,8 +41,8 @@ get '/*/commits/*' do |project_path, commit|
   erb :commit
 end
 
-post '/*/commits/*' do |project_path, commit|
-  @project      = Project.get_project(project_path)
+post '/*/commits/*' do |project_name, commit|
+  @project      = Project.get_project(project_name)
   @commit       = Commit.get_commit(@project.name, commit)
   if @project && @commit
     project_data = Octokit.repo project_name
