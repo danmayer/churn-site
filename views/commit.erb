@@ -19,7 +19,7 @@ Actions:
     </form>
   </li>
 
-<% if RACH_ENV=='development' %>
+<% if ENV['RACK_ENV']=='development' %>
 <pre>
   <%= @commit.data.inspect %>
 </pre>
