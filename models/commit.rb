@@ -72,9 +72,9 @@ class Commit
 
   def author
     if data['author']
-      data['author']
+      data['author']['login']
     else
-      data['commit']['author']
+      data['commit']['author']['login']
     end
   end
 
