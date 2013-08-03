@@ -21,7 +21,7 @@ Actions:
       <a href='/<%= @project.name %>/commits/<%= commit.name %>'>
         <%= commit.name %>
       </a>
-      (<%= commit.data['message'] %> @
+      (<%= commit.message %> @
        <%= commit.formatted_commit_time %>)
     </li>
   <% end %>
