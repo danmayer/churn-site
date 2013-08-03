@@ -10,3 +10,4 @@ api/log/*
 !.gitignore
 Procfile.prod
 log/*
+prod.env

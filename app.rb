@@ -62,7 +62,7 @@ post '/*/commits/*' do |project_name, commit|
 end
 
 
-post '/churn/*' do |project_path, commit|
+post '/churn/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
     project_data = @Octokit.repo project.name
