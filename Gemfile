@@ -11,6 +11,10 @@ gem 'octokit'
 gem 'i18n'
 gem 'active_support'
 
+group :production do
+  gem 'unicorn'
+end
+
 # Prevent installation on Heroku with
 # heroku config:add BUNDLE_WITHOUT="development:test"
 group :development, :test do
