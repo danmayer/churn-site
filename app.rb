@@ -67,7 +67,9 @@ post '/churn/*' do |project_path|
   if @project
     project_data = Octokit.repo @project.name
     client = Octokit::Client.new(:auto_traversal => true)
-    client.commits(@project.name, nil, :since => 3.months.ago) do |gh_commit|
+    commits = client.commits(@project.name, nil, :since => 3.months.ago)
+    puts "got #{commits.length}"
+    commits.each do |gh_commit|
       commit = gh_commit['sha']
       commit_data = gh_commit
       puts "calling for #{@project.name} #{project_data} #{commit} #{commit_data}"
