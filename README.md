@@ -1,22 +1,7 @@
 churn-site
 ===
 
-This is a Sinatra template starter project it now contains two templates web and api. The web is optimized to have a front end view, while that api is setup for a quick api only setup with no UI.
-
-* Web template includes bootstrap, JQuery, rack flash, http basic auth, and some base CSS/JS.
-* Api template includes https only, gem, and some other helpers for getting going
-
-This is just basically a personal template and won't be trying to support a bunch of configurable use cases, but feel free to use it if you find it helpful
-
-## To clone a project
-
-__webapp__
-
-    rake clone_web project=web_example
-    
-__api__
-
-    rake clone_api project=api_example
+A app to calculate and display churn on a project.
 
 ## To Run Examples Locally
 
@@ -26,20 +11,8 @@ __webapp__
     foreman start
     #or
     bundle exec rackup -p 3000
-
-__api__
-
-    cd api
-    bundle exec rackup -p 3000
-
-## TODO
-
-  * Provide better instructions on what to rename and redo
-  * Instructions for getting running with Heroku
-  * Opposed to generating a Sinatra app have the ability to generate a static site with rake file to upload to S3
-  * Generator should go through and rename things in the initial templates / ReadMe file like the title / header etc
-  * add figaro to manage environment, add application.yml to gitignore
-  * rename all pieces / files of client gem to more appropriate name
+    #or
+    foreman start -f Procfile.dev -e prod.env
 
 ## Contributing
 
