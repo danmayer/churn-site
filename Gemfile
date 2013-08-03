@@ -8,6 +8,7 @@ gem 'rest-client'
 gem 'addressable'
 gem 'fog'
 gem 'octokit'
+gem 'i18n'
 gem 'active_support'
 
 # Prevent installation on Heroku with
