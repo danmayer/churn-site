@@ -8,10 +8,13 @@ require 'open-uri'
 require 'addressable/uri'
 require 'fog'
 require 'octokit'
+require 'active_support/core_ext'
+
 require './lib/redis_initializer'
 require './lib/server-files'
 require './models/project'
 require './models/commit'
+
 
 DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
 DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
@@ -58,6 +61,24 @@ post '/*/commits/*' do |project_name, commit|
   end
 end
 
+
+post '/churn/*' do |project_path, commit|
+  @project      = Project.get_project(project_path)
+  if @project
+    project_data = @Octokit.repo project.name
+    client = Octokit::Client.new(:auto_traversal => true)
+    client.commits(@project.name, nil, :since => 3.months.ago) do |gh_commit|
+      commit = gh_commit['sha']
+      commit_data = gh_commit
+      find_or_create_project(@project.name, project_data, commit, commit_data)
+    end
+    forward_to_deferred_server(@project.name, @commit.name)
+  else
+    flash[:error] = 'project not found'
+    redirect '/'
+  end
+end
+
 get '/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
@@ -91,17 +112,6 @@ post '/' do
   commit = push['after']
   commit_data = push['commits'].detect{|a_commit| a_commit['id']==commit }
   find_or_create_project(project_name, project_data, commit, commit_data)
-end
-
-post '/churn/*/commits/*' do |project_path, commit|
-  @project      = Project.get_project(project_path)
-  @commit       = Commit.get_commit(@project.name, commit)
-  if @project && @commit
-    forward_to_deferred_server(@project.name, @commit.name)
-  else
-    status 404
-    body "project or commit doesn't exist!"
-  end
 end
 
 private

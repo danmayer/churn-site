@@ -8,6 +8,7 @@ gem 'rest-client'
 gem 'addressable'
 gem 'fog'
 gem 'octokit'
+gem 'active_support'
 
 # Prevent installation on Heroku with
 # heroku config:add BUNDLE_WITHOUT="development:test"
