@@ -70,6 +70,14 @@ class Commit
     end
   end
 
+  def author
+    if data['author']
+      data['author']
+    else
+      data['commit']['author']
+    end
+  end
+
   def formatted_commit_time
     commit_time.strftime("%m/%d/%Y at %I:%M%p")
   end

@@ -1,5 +1,10 @@
 <h3>Project name: <%= @project.name %></h3>
 <h5>commit: <%= @commit.name %></h5>
+<p>
+  message: <%= @commit.message %><br/>
+  author: <%= @commit.author %><br/>
+  date: <%= @commit.formatted_commit_time %>
+</p>
 
 Actions:
 <ul>
@@ -14,9 +19,11 @@ Actions:
     </form>
   </li>
 
+<% if RACH_ENV=='development' %>
 <pre>
   <%= @commit.data.inspect %>
 </pre>
+<% end %>
 
 <h5>Churn</h5>
 
