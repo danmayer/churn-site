@@ -65,7 +65,7 @@ end
 post '/churn/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
-    project_data = @Octokit.repo project.name
+    project_data = @Octokit.repo @project.name
     client = Octokit::Client.new(:auto_traversal => true)
     client.commits(@project.name, nil, :since => 3.months.ago) do |gh_commit|
       commit = gh_commit['sha']
