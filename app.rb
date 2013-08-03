@@ -70,6 +70,7 @@ post '/churn/*' do |project_path|
     client.commits(@project.name, nil, :since => 3.months.ago) do |gh_commit|
       commit = gh_commit['sha']
       commit_data = gh_commit
+      puts "calling for #{@project.name} #{project_data} #{commit} #{commit_data}" 
       find_or_create_project(@project.name, project_data, commit, commit_data)
     end
     flash[:notice] = 'project building history'
