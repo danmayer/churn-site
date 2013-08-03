@@ -72,6 +72,8 @@ post '/churn/*' do |project_path|
       commit_data = gh_commit
       find_or_create_project(@project.name, project_data, commit, commit_data)
     end
+    flash[:notice] = 'project building history'
+    redirect "/#{@project.name}"
   else
     flash[:error] = 'project not found'
     redirect '/'
