@@ -73,8 +73,13 @@ end
 post '/churn/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
-    forward_to_deferred_server(@project.name, 'history')
-    flash[:notice] = 'project building history (refresh soon)'
+    begin
+      forward_to_deferred_server(@project.name, 'history')
+      flash[:notice] = 'project building history (refresh soon)'
+    rescue RestClient::InternalServerError => error
+      puts "error on #{project_path} error #{error}"
+      flash[:error] = 'error creating project history, try again'
+    end
     redirect "/#{@project.name}"
   else
     flash[:error] = 'project not found'
