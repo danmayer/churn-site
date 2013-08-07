@@ -49,7 +49,7 @@ post '/*/commits/*' do |project_name, commit|
   @project      = Project.get_project(project_name)
   @commit       = Commit.get_commit(@project.name, commit)
   rechurn       = params['rechurn'] || 'true'
-  if @project && @commit
+  if @project && commit
     project_data = Octokit.repo project_name
     gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
     commit = gh_commit['sha']
