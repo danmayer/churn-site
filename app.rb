@@ -54,6 +54,7 @@ post '/*/commits/*' do |project_name, commit|
     gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
     commit = gh_commit['sha']
     commit_data = gh_commit
+    puts "sending with #rechurn #{rechurn}"
     find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => rechurn)
     flash[:notice] = 'project rechurning'
     redirect "/#{@project.name}/commits/#{@commit.name}"
