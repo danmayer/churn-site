@@ -119,7 +119,7 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
   if project = Project.get_project(project_name)
     project.update(project_data)
     project.add_commit(commit, commit_data)
-    if options[:rechurn]=='true' || Commit.get_commit(project_name,commit).churn_results==Commit::MISSING_CHURN_RESULTS
+    if options[:rechurn]==nil || options[:rechurn]!='true'
       forward_to_deferred_server(project.name, commit)
     end
   else
