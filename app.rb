@@ -59,6 +59,7 @@ post '/*/commits/*' do |project_name, commit|
     flash[:notice] = 'project rechurning'
     redirect "/#{@project.name}/commits/#{@commit.name}"
   else
+    puts "error project #{project_name} commit #{commit}"
     flash[:error] = 'project or commit not found'
     redirect '/'
   end
