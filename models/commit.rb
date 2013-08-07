@@ -82,13 +82,14 @@ class Commit
     commit_time.strftime("%m/%d/%Y at %I:%M%p")
   end
 
+  MISSING_CHURN_RESULTS = 'churn results missing'
   def churn_results
     filename = "project_results/results_for_#{@project_name}_#{@commit}_churn"
     churn_data = get_file(filename)
     if churn_data && churn_data!=''
       JSON.parse(churn_data)
     else
-      'churn results missing'
+      MISSING_CHURN_RESULTS
     end
   end
 

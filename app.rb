@@ -18,6 +18,7 @@ require './models/commit'
 
 DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
 DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
+DEFERRED_CHURN_TOKEN     = ENV['DEFERRED_CHURN_TOKEN']
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
@@ -47,12 +48,13 @@ end
 post '/*/commits/*' do |project_name, commit|
   @project      = Project.get_project(project_name)
   @commit       = Commit.get_commit(@project.name, commit)
+  rechurn       = params['rechurn'] || 'true'
   if @project && @commit
     project_data = Octokit.repo project_name
     gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
     commit = gh_commit['sha']
     commit_data = gh_commit
-    find_or_create_project(project_name, project_data, commit, commit_data)
+    find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => rechurn)
     flash[:notice] = 'project rechurning'
     redirect "/#{@project.name}/commits/#{@commit.name}"
   else
@@ -65,18 +67,8 @@ end
 post '/churn/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
-    project_data = Octokit.repo @project.name
-    client = Octokit::Client.new(:auto_traversal => true)
-    commits = client.commits(@project.name, nil, :since => 3.months.ago)
-    puts "got #{commits.length}"
-    commits.each do |gh_commit|
-      commit = gh_commit['sha']
-      commit_data = gh_commit
-      puts "calling for #{@project.name} #{project_data} #{commit} #{commit_data}"
-      sleep(0.5)
-      find_or_create_project(@project.name, project_data, commit, commit_data)
-    end
-    flash[:notice] = 'project building history'
+    forward_to_deferred_server(@project.name, 'history')
+    flash[:notice] = 'project building history (refresh soon)'
     redirect "/#{@project.name}"
   else
     flash[:error] = 'project not found'
@@ -121,15 +113,35 @@ end
 
 private
 
-def find_or_create_project(project_name, project_data, commit, commit_data)
+def find_or_create_project(project_name, project_data, commit, commit_data, options = {})
   if project = Project.get_project(project_name)
     project.update(project_data)
     project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project.name, commit)
+    if options[:rechurn]=='true' || commit.churn_results==Commit::MISSING_CHURN_RESULTS
+      forward_to_deferred_server(project.name, commit)
+    end
   else
     project = Project.add_project(project_name, project_data)
     project.add_commit(commit, commit_data)
     forward_to_deferred_server(project.name, commit)
+  end
+end
+
+def deferred_request(request)
+  begin
+    uri = Addressable::URI.new
+    uri.query_values = request.params.merge('deferred_request' => true)
+    request_endpoint = "#{request.path}?#{uri.query}"
+    
+    resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
+                                        :timeout => 18, 
+                                        :open_timeout => 10)
+    
+    resource.post(:signature => DEFERRED_CHURN_TOKEN,
+                  :project => 'danmayer/churn-site',
+                  :project_request => request_endpoint)
+  rescue RestClient::RequestTimeout
+    puts "Sorry, sending to deferred_request timed out"
   end
 end
 
