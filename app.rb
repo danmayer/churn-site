@@ -57,7 +57,11 @@ post '/*/commits/*' do |project_name, commit|
     puts "sending with #rechurn #{rechurn}"
     find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => rechurn)
     flash[:notice] = 'project rechurning'
-    redirect "/#{@project.name}/commits/#{@commit.name}"
+    if rechurn=='false'
+      render "success"
+    else
+      redirect "/#{@project.name}/commits/#{@commit.name}"
+    end
   else
     puts "error project #{project_name} commit #{commit}"
     flash[:error] = 'project or commit not found'
