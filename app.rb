@@ -20,6 +20,7 @@ DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
 DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
 DEFERRED_CHURN_TOKEN     = ENV['DEFERRED_CHURN_TOKEN']
 Octokit.client_id        = ENV['DS_GH_Client_ID']
+Octokit.client_secret    = ENV['DS_GH_Client_Secret']
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
