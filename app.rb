@@ -156,10 +156,12 @@ def deferred_request(request)
   end
 end
 
-def forward_to_deferred_server(project, commit)
+def forward_to_deferred_server(project, commit, options = {})
+  request_timeout = options.fetch(:timeout){ 6 }
+  request_open_timeout    = options.fetch(:open_timeout){ 6 }
   resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
-                                      :timeout => 18, 
-                                      :open_timeout => 10)
+                                      :timeout => request_timeout, 
+                                      :open_timeout => request_open_timeout)
   
   resource.post(:signature => DEFERRED_SERVER_TOKEN,
                 :project => project,
