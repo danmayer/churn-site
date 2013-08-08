@@ -129,6 +129,7 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
     project.update(project_data)
     project.add_commit(commit, commit_data)
     if options[:rechurn]==nil || options[:rechurn]!='true'
+      puts "forwarding commit to deffered_server #{commit}"
       forward_to_deferred_server(project.name, commit)
     end
   else
