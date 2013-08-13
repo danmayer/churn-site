@@ -9,6 +9,7 @@ require 'addressable/uri'
 require 'fog'
 require 'octokit'
 require 'active_support/core_ext'
+require "better_errors"
 
 require './lib/redis_initializer'
 require './lib/server-files'
@@ -26,6 +27,11 @@ set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
 enable :logging
 enable :sessions
+
+configure :development do
+  use BetterErrors::Middleware
+  BetterErrors.application_root = File.dirname(__FILE__)
+end
 
 helpers do
 end

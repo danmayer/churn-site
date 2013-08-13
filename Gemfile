@@ -15,13 +15,16 @@ group :production do
   gem 'unicorn'
 end
 
-# Prevent installation on Heroku with
-# heroku config:add BUNDLE_WITHOUT="development:test"
 group :development, :test do
-  gem 'rack-test'
-  gem 'mocha'
+   gem 'rack-test'
+   gem 'mocha'
+end
+
+group :development do
   gem 'shotgun'
   gem 'pry'
   gem 'leader', :git => 'git://github.com/halo/leader.git'
   gem 'foreman'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
