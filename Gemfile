@@ -13,6 +13,7 @@ gem 'active_support'
 
 group :production do
   gem 'unicorn'
+  gem 'newrelic_rpm'
 end
 
 group :development, :test do

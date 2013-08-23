@@ -33,6 +33,10 @@ configure :development do
   BetterErrors.application_root = File.dirname(__FILE__)
 end
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 helpers do
 end
 
