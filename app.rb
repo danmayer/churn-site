@@ -112,16 +112,21 @@ end
 post '/projects/add' do
   project_name = params['project_name']
   if project_name
-    project_data = Octokit.repo project_name
-    gh_commit = Octokit.commits(project_name).first
-    commit = gh_commit['sha']
-    commit_data = gh_commit
-    find_or_create_project(project_name, project_data, commit, commit_data)
-    flash[:notice] = 'project created'
+    begin
+      project_data = Octokit.repo project_name
+      gh_commit = Octokit.commits(project_name).first
+      commit = gh_commit['sha']
+      commit_data = gh_commit
+      find_or_create_project(project_name, project_data, commit, commit_data)
+      flash[:notice] = 'project created'
+    rescue Octokit::NotFound
+      flash[:notice] = "project not found try without full url or initial slash EX:'danmayer/churn'"
+      redirect '/'
+    end
   else
     flash[:notice] = 'project name required'
+    redirect '/'
   end
-  redirect '/'
 end
 
 post '/' do
