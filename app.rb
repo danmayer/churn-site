@@ -9,7 +9,9 @@ require 'addressable/uri'
 require 'fog'
 require 'octokit'
 require 'active_support/core_ext'
+require 'airbrake'
 
+require './lib/rack_catcher'
 require './lib/redis_initializer'
 require './lib/server-files'
 require './models/project'
@@ -35,6 +37,15 @@ end
 
 configure :production do
   require 'newrelic_rpm'
+  Airbrake.configure do |config|
+    config.api_key = ENV['ERRBIT_API_KEY']
+    config.host    = ENV['ERRBIT_HOST']
+    config.port    = 80
+    config.secure  = config.port == 443
+  end
+  use Rack::Catcher
+  use Airbrake::Rack
+  set :raise_errors, true
 end
 
 helpers do

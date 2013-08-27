@@ -10,6 +10,7 @@ gem 'fog'
 gem 'octokit'
 gem 'i18n'
 gem 'active_support'
+gem 'airbrake'
 
 group :production do
   gem 'unicorn'
