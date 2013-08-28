@@ -13,8 +13,9 @@ class MyAppTest < Test::Unit::TestCase
   end
 
   def test_root
+    Project.stubs(:projects).returns([])
     get '/'
-    assert_match 'Welcome', last_response.body
+    assert_match 'churn', last_response.body
   end
 
   private

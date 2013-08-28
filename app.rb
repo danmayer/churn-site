@@ -58,14 +58,22 @@ before /.*/ do
 end
 
 get '/' do
-  @projects      = Project.projects
+  @projects = Project.projects
   erb :index
 end
 
 get '/*/commits/*' do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
-  erb :commit
+  if @project && @commit
+    erb :commit
+  elsif @project
+    flash[:error] = 'project commit not found'
+    redirect "/#{@project.name}/"
+  else
+    flash[:error] = 'project not found'
+    redirect "/"
+  end
 end
 
 post '/*/commits/*' do |project_name, commit|
