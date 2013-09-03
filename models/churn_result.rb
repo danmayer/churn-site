@@ -18,7 +18,7 @@ class ChurnResult
     if @data && @data!=''
       @data = JSON.parse(@data)
       #old data wasn't a hash but a string ignore old data
-      MISSING_CHURN_RESULTS if @data.is_a(String)
+      MISSING_CHURN_RESULTS if @data.is_a?(String)
     else
       MISSING_CHURN_RESULTS
     end
