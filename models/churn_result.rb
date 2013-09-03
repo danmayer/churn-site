@@ -46,7 +46,7 @@ class ChurnResult
   end
 
   def formatted_results
-    Churn::ChurnCalculator.to_s(yaml_results)
+    Churn::ChurnCalculator.to_s(yaml_results[:churn])
   end
   
   def yaml_results
