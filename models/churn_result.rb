@@ -1,4 +1,4 @@
-require 'churn'
+require 'churn/churn_calculator'
 
 class ChurnResult
   include ServerFiles
