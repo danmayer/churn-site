@@ -16,6 +16,7 @@ require './lib/redis_initializer'
 require './lib/server-files'
 require './models/project'
 require './models/commit'
+require './models/churn_result'
 
 DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
 DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
