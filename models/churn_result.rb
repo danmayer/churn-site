@@ -1,3 +1,5 @@
+require 'churn'
+
 class ChurnResult
   include ServerFiles
   MISSING_CHURN_RESULTS = 'churn results missing'
@@ -10,7 +12,7 @@ class ChurnResult
   end
   
   def filename
-    filename = "project_results/results_for_#{@project_name}_#{@commit}_churn"
+    "project_results/results_for_#{@project_name}_#{@commit}_churn"
   end
   
   def data
@@ -27,7 +29,7 @@ class ChurnResult
               end
   end
   
-  def exist?
+  def exists?
     data!=MISSING_CHURN_RESULTS
   end
   
@@ -42,5 +44,17 @@ class ChurnResult
   def results
     data['results']
   end
+
+  def formatted_results
+    Churn::ChurnCalculator.to_s(yaml_results)
+  end
   
+  def yaml_results
+    YAML.load(data['results'].gsub(/(.*)---/m,'---'))
+  end
+
+  def file_changes
+    yaml_results[:churn][:changes].length
+  end
+
 end

@@ -20,6 +20,7 @@ A app to calculate and display churn on a project.
 * clean up / refactoring
 * test coverage
 * travis-ci
+* build a working heroku console that loads all the right classes
 
 ## Contributing
 

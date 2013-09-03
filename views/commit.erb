@@ -28,7 +28,7 @@ Actions:
 <h5>Churn</h5>
 
 <% @churn_results = @commit.churn_results %>
-<% if @churn_results.exist? %>
+<% if @churn_results.exists? %>
  <% if @churn_results.command %>
   <p>
     <strong>command run:</strong> <code><%= @churn_results.command %></code>
@@ -42,8 +42,10 @@ Actions:
   <% end %>
 
   <pre>
-    <%= @churn_results.results %>
+    <%= @churn_results.formatted_results %>
   </pre>
+
+  <strong>files changes: <%= @churn_results.file_changes %></strong>
 
 <% else %>
   <pre>

@@ -11,6 +11,7 @@ gem 'octokit'
 gem 'i18n'
 gem 'active_support'
 gem 'airbrake'
+gem 'churn'
 
 group :production do
   gem 'unicorn'
