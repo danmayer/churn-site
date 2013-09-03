@@ -14,16 +14,18 @@ class ChurnResult
   end
   
   def data
-    @data ||= get_file(filename)
-    if @data && @data!=''
-      @data = JSON.parse(@data)
-      #old data wasn't a hash but a string ignore old data
-      MISSING_CHURN_RESULTS if @data.is_a?(String)
-    else
-      MISSING_CHURN_RESULTS
-    end
+    @data ||= begin
+                @data = get_file(filename)
+                if @data && @data!=''
+                  @data = JSON.parse(@data)
+                  #old data wasn't a hash but a string ignore old data
+                  MISSING_CHURN_RESULTS if @data.is_a?(String)
+                else
+                  MISSING_CHURN_RESULTS
+                end
+              end
   end
-
+  
   def exist?
     data!=MISSING_CHURN_RESULTS
   end
