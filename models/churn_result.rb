@@ -47,8 +47,10 @@ class ChurnResult
 
   def formatted_results
     Churn::ChurnCalculator.to_s(yaml_results[:churn])
-  rescue Psych::SyntaxError, TypeError
+  rescue Psych::SyntaxError
     "error parsing results:\n #{results}"
+  rescue TypeError
+    "error in results:\n #{results}"
   end
   
   def yaml_results
@@ -58,6 +60,8 @@ class ChurnResult
   def file_changes
     yaml_results[:churn][:changes].length
   rescue Psych::SyntaxError, TypeError
+    nil
+  rescue TypeError
     nil
   end
 
