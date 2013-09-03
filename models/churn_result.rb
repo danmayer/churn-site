@@ -46,11 +46,9 @@ class ChurnResult
   end
 
   def formatted_results
-    begin
-      Churn::ChurnCalculator.to_s(yaml_results[:churn])
-    rescue Psych::SyntaxError
-      "error parsing results:\n #{results}"
-    end
+    Churn::ChurnCalculator.to_s(yaml_results[:churn])
+  rescue Psych::SyntaxError
+    "error parsing results:\n #{results}"
   end
   
   def yaml_results
@@ -59,6 +57,8 @@ class ChurnResult
 
   def file_changes
     yaml_results[:churn][:changes].length
+  rescue Psych::SyntaxError
+    nil
   end
 
 end
