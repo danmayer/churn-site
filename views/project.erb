@@ -1,6 +1,6 @@
-<h3>Project name: <%= @project.name %></h3>
+<h3><a href="/<%= @project.name %>"><%= @project.name %></a></h3>
 
-Actions:
+<h4>Actions</h4>
 <ul>
   <li>
    <a href="http://github.com/<%= @project.name %>">
@@ -15,6 +15,15 @@ Actions:
 </ul>
 
 <h5>Churn History</h5>
+
+<pre>
+  <% @project.sorted_commits.each do |commit|
+    churn_results = commit.churn_results 
+    if churn_results.exists? %>
+    <%= churn_results.file_changes %>
+  <% end %>
+</pre>
+
 <ul>
   <% @project.sorted_commits.each do |commit| %>
     <li>

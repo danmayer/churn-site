@@ -1,4 +1,4 @@
-<h3>Project name: <a href="/<%= @project.name %>"><%= @project.name %></a></h3>
+<h3><a href="/<%= @project.name %>"><%= @project.name %></a></h3>
 <h5>commit: <%= @commit.name %></h5>
 <p>
   message: <%= @commit.message %><br/>
@@ -6,7 +6,7 @@
   date: <%= @commit.formatted_commit_time %>
 </p>
 
-Actions:
+<h4>Actions</h4>
 <ul>
   <li>
    <a href="http://github.com/<%= @project.name %>">
