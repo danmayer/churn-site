@@ -14,12 +14,12 @@ A app to calculate and display churn on a project.
 
 ## TODO
 
+* Procfile to start locally and to open up production data set
 * better history needs to not hit itself but pass off to deferred server which will do the work.
 * look at metric-fu code to get single commit per day for history, which would limit to 30 commits opposed to getting all in last 30 days.
 * clean up / refactoring
 * test coverage
 * travis-ci
-
 
 ## Contributing
 
