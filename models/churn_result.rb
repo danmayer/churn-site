@@ -20,6 +20,7 @@ class ChurnResult
                   @data = JSON.parse(@data)
                   #old data wasn't a hash but a string ignore old data
                   MISSING_CHURN_RESULTS if @data.is_a?(String)
+                  @data
                 else
                   MISSING_CHURN_RESULTS
                 end
@@ -29,17 +30,17 @@ class ChurnResult
   def exist?
     data!=MISSING_CHURN_RESULTS
   end
-
+  
   def command
     data['cmd_run']
   end
-
+  
   def exit_status
     data['exit_status']
   end
-
+  
   def results
     data['results']
   end
-
+  
 end
