@@ -17,7 +17,6 @@ require './lib/server-files'
 require './models/project'
 require './models/commit'
 
-
 DEFERRED_SERVER_ENDPOINT = "http://git-hook-responder.herokuapp.com/"
 DEFERRED_SERVER_TOKEN    = ENV['DEFERRED_ADMIN_TOKEN']
 DEFERRED_CHURN_TOKEN     = ENV['DEFERRED_CHURN_TOKEN']
@@ -175,24 +174,6 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
   end
 end
 
-def deferred_request(request)
-  begin
-    uri = Addressable::URI.new
-    uri.query_values = request.params.merge('deferred_request' => true)
-    request_endpoint = "#{request.path}?#{uri.query}"
-    
-    resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
-                                        :timeout => 18, 
-                                        :open_timeout => 10)
-    
-    resource.post(:signature => DEFERRED_CHURN_TOKEN,
-                  :project => 'danmayer/churn-site',
-                  :project_request => request_endpoint)
-  rescue RestClient::RequestTimeout
-    puts "Sorry, sending to deferred_request timed out"
-  end
-end
-
 def forward_to_deferred_server(project, commit, options = {})
   request_timeout = options.fetch(:timeout){ 6 }
   request_open_timeout    = options.fetch(:open_timeout){ 6 }
@@ -203,7 +184,7 @@ def forward_to_deferred_server(project, commit, options = {})
   resource.post(:signature => DEFERRED_SERVER_TOKEN,
                 :project => project,
                 :commit => commit,
-                :command => 'churn')
+                :command => 'churn --yaml')
 rescue RestClient::RequestTimeout
   puts "timed out during deferred-server hit"
 end

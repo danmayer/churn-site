@@ -27,25 +27,29 @@ Actions:
 
 <h5>Churn</h5>
 
-<% if @commit.churn_results.is_a?(String) %>
+<% @churn_results = @commit.churn_results %>
+<% if @churn_results.exist? %>
+ <% if @churn_results.command %>
+  <p>
+    <strong>command run:</strong> <code><%= @churn_results.command %></code>
+  </p>
+  <% end %>
+
+  <% if @churn_results.exit_status %>
+  <p>
+    <strong>command exit status:</strong> <code><%= @churn_results.exit_status %></code>
+  </p>
+  <% end %>
+
   <pre>
-<%= @commit.churn_results %>
+    <%= @churn_results.results %>
   </pre>
+
 <% else %>
-  <% @run_results = @commit.churn_results %>
-  <% if @run_results['cmd_run'] %>
-  <p>
-    <strong>command run:</strong> <code><%= @run_results['cmd_run'] %></code>
-  </p>
-  <% end %>
-
-  <% if @run_results['exit_status'] %>
-  <p>
-    <strong>command exit status:</strong> <code><%= @run_results['exit_status'] %></code>
-  </p>
-  <% end %>
-
   <pre>
-<%= @run_results['results'] %>
+    <%= ChurnResult::MISSING_CHURN_RESULTS %>
   </pre>
+<% end %>
+
+  
 <% end %>
