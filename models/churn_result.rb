@@ -1,5 +1,5 @@
 class ChurnResult
-
+  include ServerFiles
   MISSING_CHURN_RESULTS = 'churn results missing'
   
   attr_accessor :project_name, :commit, :data

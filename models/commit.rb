@@ -1,5 +1,4 @@
 class Commit
-  include ServerFiles
   REDIS_KEY = 'churn-commits'
 
   def self.commits_key(project_name)
