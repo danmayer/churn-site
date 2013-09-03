@@ -20,8 +20,9 @@
   <% @project.sorted_commits.each do |commit|
     churn_results = commit.churn_results 
     if churn_results.exists? %>
-    <%= churn_results.file_changes %>
-  <% end %>
+      <%= churn_results.file_changes %>
+    <% end
+    end %>
 </pre>
 
 <ul>
