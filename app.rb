@@ -121,18 +121,23 @@ end
 get '/chart/*' do |project_path|
   @project      = Project.get_project(project_path)
 
-  # @project.sorted_commits.map{ |commit|
-  #   churn_results = commit.churn_results 
-  #   churn_results.exists? ? churn_results.file_changes : nil
-  # }.compact.inspect
+  series_labels = []
+  series_data = []
+  @project.sorted_commits.map do |commit|
+    churn_results = commit.churn_results 
+    if churn_results.exists? && churn_results.file_changes!=nil
+      series_labels << commit.formatted_commit_time
+      series_data << churn_results.file_changes
+    end
+  end
 
   @chartdata = {
-    labels: ["January","February","March","April","May","June","July"],
+    labels: series_labels,
     datasets: [
       {
 	fillColor: "rgba(151,187,205,0.5)",
 	strokeColor: "rgba(151,187,205,1)",
-	data: [28,48,40,19,96,27,100]
+	data: series_data
       }
     ]
   }
