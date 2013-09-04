@@ -81,6 +81,10 @@ class Commit
     commit_time.strftime("%m/%d/%Y at %I:%M%p")
   end
 
+  def short_formatted_commit_datetime
+    commit_time.strftime("%m/%d/%Y")
+  end
+
   def churn_results
     ChurnResult.new(@project_name, @commit)
   end

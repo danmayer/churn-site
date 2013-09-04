@@ -119,14 +119,14 @@ post '/churn/*' do |project_path|
 end
 
 get '/chart/*' do |project_path|
-  @project      = Project.get_project(project_path)
+  @project = Project.get_project(project_path)
 
   series_labels = []
   series_data = []
   @project.sorted_commits.map do |commit|
     churn_results = commit.churn_results 
-    if churn_results.exists? && churn_results.file_changes!=nil
-      series_labels << commit.formatted_commit_time
+    if churn_results.exists? && churn_results.file_changes!=nil && !series_labels.include?(commit.short_formatted_commit_datetime)
+      series_labels << commit.short_formatted_commit_datetime
       series_data << churn_results.file_changes
     end
   end
