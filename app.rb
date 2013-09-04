@@ -136,7 +136,7 @@ get '/chart/*' do |project_path|
       }
     ]
   }
-  erb :chart
+  erb :chart, :layout => false
 end 
 
 get '/*' do |project_path|
