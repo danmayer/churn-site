@@ -125,7 +125,7 @@ get '/chart/*' do |project_path|
   series_data = []
   @project.sorted_commits.map do |commit|
     churn_results = commit.churn_results 
-    if churn_results.exists? && churn_results.file_changes!=nil && !series_labels.include?(commit.short_formatted_commit_datetime)
+    if !series_labels.include?(commit.short_formatted_commit_datetime) && churn_results.exists? && churn_results.file_changes!=nil
       series_labels << commit.short_formatted_commit_datetime
       series_data << churn_results.file_changes
     end
