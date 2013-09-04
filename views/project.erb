@@ -19,6 +19,7 @@
 <div class="chart-loading" data-url="/chart/<%= @project.name %>" style="width:700px; height:300px; text-align:center">
   <img src="/images/ajax-loader.gif" id="loading-indicator" />
 </div>
+<h5># Files above churn threshold</h5>
 
 <ul>
   <% @project.sorted_commits.each do |commit| %>
