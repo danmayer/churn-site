@@ -2,7 +2,7 @@ body {
   padding-top: 50px;
 }
 
-chart-label {
+.chart-label {
     text-align: center;
     margin-top:40px;
 }

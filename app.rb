@@ -156,6 +156,8 @@ end
 
 post '/projects/add' do
   project_name = params['project_name']
+  #fix starting with a slash if they did that
+  project_name = project_name[1...project_name.length] if project_name[0]=='/'
   if project_name
     begin
       project_data = Octokit.repo project_name
@@ -166,12 +168,11 @@ post '/projects/add' do
       flash[:notice] = 'project created'
     rescue Octokit::NotFound
       flash[:notice] = "project not found try without full url or initial slash EX:'danmayer/churn'"
-      redirect '/'
     end
   else
     flash[:notice] = 'project name required'
-    redirect '/'
   end
+  redirect '/'
 end
 
 post '/' do
