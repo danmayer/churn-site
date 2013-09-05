@@ -107,7 +107,7 @@ post '/churn/*' do |project_path|
     begin
       if params['existing']=='true'
         commits = @project.sorted_commits.map{|commit| commit.name }
-        forward_to_deferred_server(@project.name, commits.join(',')
+        forward_to_deferred_server(@project.name, commits.join(','))
       else
         forward_to_deferred_server(@project.name, 'history')
       end
