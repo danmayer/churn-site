@@ -2,6 +2,11 @@ body {
   padding-top: 50px;
 }
 
+chart-label {
+    text-align: center;
+    margin-top:40px;
+}
+
 footer{
     background-color: #eee;
     padding-left: 20px;	

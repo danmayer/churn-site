@@ -1,12 +1,15 @@
-<h3>Projects: (<%= @projects.length %>)
-      <form action="/projects/add" method="post">
-        <label>Github path: 
-          <input type="text" name="project_name" placeholder="danmayer/churn" />
-        </label>
-        <input type="submit" name="submit" value="Churn It" class="button stacked" />
-      </form>
+<h3>Add Project</h3>
+
+  <form action="/projects/add" method="post">
+    <label>Github path: 
+      <input type="text" name="project_name" placeholder="danmayer/churn" />
+    </label>
+    <input type="submit" name="submit" value="Churn It" class="button stacked" />
+  </form>
+
+<h3>Current Projects: (<%= @projects.length %>)</h3>
 <ul>
-  <% @projects.each do |project| %>
+  <% @projects.sort.each do |project| %>
     <li><a href='/<%= project %>'><%= project %></a></li>
   <% end %>
 </ul>
