@@ -9,6 +9,12 @@
   </li>
   <li>
     <form action="/churn/<%= @project.name %>" method="post">
+      <input type="hidden" name="existing" value="true" />
+      <input type="submit" name="submit" value="rebuilt commits" class="button stacked" />
+    </form>
+  </li>
+  <li>
+    <form action="/churn/<%= @project.name %>" method="post">
       <input type="submit" name="submit" value="build churn history" class="button stacked" />
     </form>
   </li>

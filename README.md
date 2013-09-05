@@ -1,22 +1,21 @@
-churn-site
+amacs churn-site
 ===
 
 A app to calculate and display churn on a project.
 
 ## To Run Examples Locally
 
-    cd web
     foreman start
     #or
     bundle exec rackup -p 3000
-    #or
+    #or with dev procfile for shotgun reloading
     foreman start -f Procfile.dev -e prod.env
+    #or local with production data (make sure red is and other env vars are set)
+    RACK_ENV=production foreman start -f Procfile
 
 ## TODO
 
-* Procfile to start locally and to open up production data set
 * better history needs to not hit itself but pass off to deferred server which will do the work.
-* look at metric-fu code to get single commit per day for history, which would limit to 30 commits opposed to getting all in last 30 days.
 * clean up / refactoring
 * test coverage
 * travis-ci

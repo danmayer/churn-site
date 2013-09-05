@@ -105,8 +105,13 @@ post '/churn/*' do |project_path|
   @project      = Project.get_project(project_path)
   if @project
     begin
-      forward_to_deferred_server(@project.name, 'history')
-      flash[:notice] = 'project building history (refresh soon)'
+      if params['existing']=='true'
+        commits = @project.sorted_commits.map{|commit| commit.name }
+        forward_to_deferred_server(@project.name, commits.join(',')
+      else
+        forward_to_deferred_server(@project.name, 'history')
+      end
+        flash[:notice] = 'project building history (refresh soon)'
     rescue RestClient::InternalServerError => error
       puts "error on #{project_path} error #{error}"
       flash[:error] = 'error creating project history, try again'
@@ -145,7 +150,7 @@ get '/chart/*' do |project_path|
 end 
 
 get '/*' do |project_path|
-  @project      = Project.get_project(project_path)
+  @project = Project.get_project(project_path)
   if @project
     erb :project
   else
@@ -165,7 +170,7 @@ post '/projects/add' do
       commit = gh_commit['sha']
       commit_data = gh_commit
       find_or_create_project(project_name, project_data, commit, commit_data)
-      flash[:notice] = 'project created'
+      flash[:notice] = "project #{project_name} created"
     rescue Octokit::NotFound
       flash[:notice] = "project not found try without full url or initial slash EX:'danmayer/churn'"
     end
@@ -175,6 +180,7 @@ post '/projects/add' do
   redirect '/'
 end
 
+#handles github post push webhook calls
 post '/' do
   push = JSON.parse(params['payload'])
   project_url = push['repository']['url']
