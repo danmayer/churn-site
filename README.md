@@ -1,7 +1,9 @@
-amacs churn-site
+churn-site
 ===
 
 A app to calculate and display churn on a project.
+
+This is a web front-end and hooks that trigger builds, but all the data is powered by the [churn gem](https://github.com/danmayer/churn)
 
 ## To Run Examples Locally
 
@@ -16,7 +18,6 @@ A app to calculate and display churn on a project.
 ## TODO
 
 * fix issues with class and method level churn
-* caching or speed up the graph rendering
 * clean up / refactoring
 * test coverage
 * travis-ci
