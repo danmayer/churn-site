@@ -15,7 +15,8 @@ A app to calculate and display churn on a project.
 
 ## TODO
 
-* better history needs to not hit itself but pass off to deferred server which will do the work.
+* fix issues with class and method level churn
+* caching or speed up the graph rendering
 * clean up / refactoring
 * test coverage
 * travis-ci
