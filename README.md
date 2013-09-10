@@ -17,6 +17,8 @@ This is a web front-end and hooks that trigger builds, but all the data is power
 
 ## TODO
 
+* verify and test history is build in correct order (oldest first)
+* automatically build out history on first add or web hook hit
 * fix issues with class and method level churn
 * clean up / refactoring
 * test coverage
@@ -32,6 +34,10 @@ This is a web front-end and hooks that trigger builds, but all the data is power
 5. If you haven't already read about good [Pull Request practices](http://codeinthehole.com/writing/pull-requests-and-other-good-practices-for-teams-using-github/) or have never submitted one before read about submitting [your first pull request](http://jumpstartlab.com/news/archives/2013/04/15/your-first-pull-request)
 6. Open a [Pull Request](https://help.github.com/articles/using-pull-requests)
 7. Awesome thanks I will try to get back to you soon.
+
+## Thanks
+
+* Awesome charts thanks to [chart.js](http://www.chartjs.org/docs/)
 
 ## MIT License
 

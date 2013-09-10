@@ -1,0 +1,56 @@
+<h1>Code Churn</h1>
+
+<p>
+There are many metrics that can help identify potentially problematic code. Code churn is how often code is changing over time. One metric that has a high correlation with buggy code is high-churn code. High churn doesn't always mean bad, but it can help point to potential 'hotspots' in your code ripe for bugs.
+</p>
+
+<table>
+<tr>
+  <td width="50%">
+    <img src="/images/churn.jpg" alt="churn" />
+    <br/>
+    image courtesy of <a href="http://www.flickr.com/photos/zooboing/4402413305/sizes/o/in/photostream/">zooboing</a>
+  </td>
+  <td width="50%">
+    <blockquote class="pull-right" style="display:inline-block">
+    Code churn metrics were found to be among the most highly correlated with problem reports
+    <small>
+      <a href="http://research.microsoft.com/pubs/69126/icse05churn.pdf">
+        <cite title="Use of Relative Code Churn Measures to Predict System Defect Density">Use of Relative Code Churn Measures to Predict System Defect Density, Microsoft Research</cite>
+      </a>
+    </small>
+    </blockquote>
+  </td>
+</tr>
+</table>
+<div class="clearfix"><br/></div>
+
+<p>
+Code with high churn often means that it is closely couple with other parts of the system. Which means when any other part of the code is changed the high churn code also needs to be changed. That isn't really a problem if it is a well tested interface or configuration file that is expected to change often. It is a problem if it is a crazy conditional soup that is copied multiple places in the code. Often a class or function that has high churn is violating the <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>. Churn lets you see the frequency of sections of your code as they change over time.
+</p>
+
+<blockquote class="pull-right">
+Quite often, metrics views of code are restricted to static measures of code quality. Adding the time dimension through version-control history gives us a broader view. We can use that view to guide our refactoring decisions.
+  <small>
+    <a href="http://www.stickyminds.com/sitewide.asp?Function=edetail&ObjectType=COL&ObjectId=16679&tth=DYN&tt=siteemail&iDyn=2">
+      <cite title="wikipedia article">Getting Empirical about Refactoring, Michael Feathers</cite>
+    </a>
+  </small>
+</blockquote>
+<div class="clearfix"></div>
+
+<h3>Picoappz Code Churn Implementation</h3>
+<p>
+Currently this site is focused on Ruby projects, it uses the <a href="https://github.com/danmayer/churn">churn gem</a> to power it's data. The code, is a small open source Sinatra app called <a href="https://github.com/danmayer/churn-site">churn-site</a>, which is running on Heroku. The churn gem analyzes a commit in a Git repo and notes which files, classes, and methods were changed. While it does support files in any language it currently only supports class and method level churn for Ruby code.
+<br/><br/>
+This project makes it easier to run churn over a series of commits to build up a list of the highest churn classes and methods (files you can get at any point in time just using git log). The site also helps chart the number of files with high churn over time. I plan on adding some additional visualizations to better extract value from the information in the future. I think finding methods with high churn compared to the average churn in a project can be valuable. Overall file count with churn over a threshold can give some insight to the size and velocity of the project.Much of the churn data isn't support valuable on it's own. I think breaking the data down more as Michael Feathers suggests, is where churn data can be mixed with other data to make it more valuable. Many of the projects mentioned below try to do just that, making the metrics more. OK, so why aren't more code metrics included here?
+<br/><br/>
+This is just a personal side project and I am trying to keep it simple and solve one problem well, code churn. I want to track churn over the history of a project at the file, class, and method level. I want to provide a API to add and fetch the churn data. I want to add support for multiple languages. I have seen to many projects crumble under the weight of to many features, I want to keep this project simple.
+<br/><br/>
+I am hoping that additional features can be built utilizing data provided by the API, and that this can explore a different SOA approach to building code metrics than currently existing tools. If your interested in integrating a tool or collecting churn data across projects, let me know.
+</p>
+
+<h3>Churn alternatives / Tools utilizing code churn</h3>
+<p>
+There are a number of good tools that give access to churn data. The <a href="https://github.com/danmayer/churn">churn gem</a> (same that powers this project) is integrated into <a href="http://metric-fu.rubyforge.org/">Metric Fu</a>, which combines a number of useful code metrics. It helps make sense of many of the metrics and can build graphs of the metrics over time. Not up for managing metrics for your own project? Definitely check out, <a href="https://codeclimate.com/">Code Climate</a>. Code Climate takes churn into account for it's hotspots. It is similar to Metric Fu but much more polished and provides more actionable and readable data. Also, Code Climate is free for Open Source software! Another, simpler approach than more fancy code metrics dashboards is <a href="http://chadfowler.com/">Chad Fowler's</a> <a href="https://github.com/chad/turbulence">Turbulence Gem</a> which graphs churn vs. code complexity. Turbulence is an implementation of the ideas explained in the <a href="http://www.stickyminds.com/sitewide.asp?Function=edetail&ObjectType=COL&ObjectId=16679&tth=DYN&tt=siteemail&iDyn=2">Getting Empirical about Refactoring</a> article I cited above.
+</p>

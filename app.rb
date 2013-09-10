@@ -62,6 +62,14 @@ get '/' do
   erb :index
 end
 
+get '/about' do
+  erb :about
+end
+
+get '/instructions' do
+  erb :instructions
+end
+
 get '/*/commits/*' do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
