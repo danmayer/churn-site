@@ -16,7 +16,7 @@
   
   <h3>Projects tracking code churn: (<%= @projects.length %>)</h3>
   <ul>
-    <% @projects.sort.each do |project| %>
+    <% @projects.sort{|a,b| a.downcase <=> b.downcase }.each do |project| %>
       <li><a href='/<%= project %>'><%= project %></a></li>
     <% end %>
   </ul>
