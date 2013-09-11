@@ -1,4 +1,9 @@
-<h3>Add Project</h3>
+<h1>Code Churn: track code change velocity over time</h1>
+  <p>Churn can help you discover overly coupled code in your project, read more about <a href="/about">code churn</a> to see how it can help you understand your project better. Ready to get started add a project below or browse exsiting projects to get a better idea of what churn data can show you.</p>
+
+<table>
+  <tr><td widht="50%" valign="top">
+  <h3>Add Project</h3>
 
   <form action="/projects/add" method="post">
     <label>Github path: 
@@ -7,9 +12,13 @@
     <input type="submit" name="submit" value="Churn It" class="button stacked" />
   </form>
 
-<h3>Current Projects: (<%= @projects.length %>)</h3>
-<ul>
-  <% @projects.sort.each do |project| %>
-    <li><a href='/<%= project %>'><%= project %></a></li>
-  <% end %>
-</ul>
+  </td><td width="50%" valign="top">
+  
+  <h3>Projects tracking code churn: (<%= @projects.length %>)</h3>
+  <ul>
+    <% @projects.sort.each do |project| %>
+      <li><a href='/<%= project %>'><%= project %></a></li>
+    <% end %>
+  </ul>
+</td></tr>
+</table>

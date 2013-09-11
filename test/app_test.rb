@@ -20,7 +20,7 @@ class MyAppTest < Test::Unit::TestCase
 
   def test_commit_show
     project_name = '/danmayer/churn-site'
-    churn_results = stub('churn_result', :exist? => false)
+    churn_results = stub('churn_result', :exists? => false)
     project = stub('project', :name => project_name)
     commit  = stub('commit', :name => '4f4d3ee27d1722cb71e8237b8e48bf475fc3b7c6',
                    :project_name => project_name,

@@ -49,6 +49,11 @@ configure :production do
 end
 
 helpers do
+
+  def partial template
+    erb template, :layout => false
+  end
+
 end
 
 before /.*/ do
@@ -141,7 +146,7 @@ get '/chart/*' do |project_path|
       churn_results = commit.churn_results 
       if churn_results.exists? && churn_results.file_changes!=nil
         series_labels << commit.short_formatted_commit_datetime
-        series_data << churn_results.file_changes
+        series_data << churn_results.file_changes_count
       end
     end
   end

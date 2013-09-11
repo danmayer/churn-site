@@ -1,0 +1,15 @@
+<ul>
+  <li>
+    <strong>High Churn Files</strong>
+    <%= @most_recent_results.high_churn_file_count %> (files with churn > avg file churn)
+    <br/><%= @most_recent_results.avg_churn_file_count %> (avg file churn)
+  </li>
+  <li><strong>High Churn Classes</strong> 
+    <%= @most_recent_results.high_churn_class_count %> (classes with churn > avg class churn)
+    <br/><%= @most_recent_results.avg_churn_class_count %> (avg class churn)
+  </li>
+  <li><strong>High Churn Methods</strong> 
+    <%= @most_recent_results.high_churn_method_count %> (methods with churn > avg method churn)
+    <br/><%= @most_recent_results.avg_churn_method_count %> (avg method churn)
+  </li>
+</ul>

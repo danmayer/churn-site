@@ -17,6 +17,7 @@ This is a web front-end and hooks that trigger builds, but all the data is power
 
 ## TODO
 
+* setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * verify and test history is build in correct order (oldest first)
 * automatically build out history on first add or web hook hit
 * fix issues with class and method level churn

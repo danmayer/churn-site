@@ -18,6 +18,7 @@
       <input type="submit" name="submit" value="re-churn commit" class="button stacked" />
     </form>
   </li>
+</ul>
 
 <% if ENV['RACK_ENV']=='development' %>
 <pre>
@@ -25,10 +26,16 @@
 </pre>
 <% end %>
 
-<h5>Churn</h5>
+<h3>Churn Data</h3>
 
 <% @churn_results = @commit.churn_results %>
 <% if @churn_results.exists? %>
+
+  <% @most_recent_results = @churn_results %>
+  <h5>Stats</h5>
+  <%= partial :commit_breakdown %>
+  <br/>
+
  <% if @churn_results.command %>
   <p>
     <strong>command run:</strong> <code><%= @churn_results.command %></code>
@@ -43,7 +50,7 @@
 
   <pre><%= @churn_results.formatted_results %></pre>
 
-  <strong>files changes over threshold: <%= @churn_results.file_changes %></strong>
+  <strong>files changes over threshold: <%= @churn_results.file_changes_count %></strong>
 
 <% else %>
   <pre>

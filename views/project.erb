@@ -1,7 +1,7 @@
 <h3><a href="/<%= @project.name %>"><%= @project.name %></a></h3>
 
 <h4>Actions</h4>
-<ul>
+<ul class="actions">
   <li>
    <a href="http://github.com/<%= @project.name %>">
      view <%= @project.name %> on github
@@ -19,6 +19,12 @@
     </form>
   </li>
 </ul>
+
+<% @most_recent_results = @project.sorted_commits.first.try(:churn_results) %>
+<% if @most_recent_results %>
+  <h5>Current Stats</h5>
+  <%= partial :commit_breakdown %>
+<% end %>
 
 <h5>Churn History</h5>
 
