@@ -97,7 +97,7 @@ class ChurnResult
     #todo normal the hash it is symbols here and string elsewhere
     sum = yaml_results[:churn][:changes].sum{|item| item[:times_changed].to_i}
     (sum.to_f / file_changes_count.to_f).round(2)
-  rescue Psych::SyntaxError, TypeError
+  rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
   rescue TypeError
     nil
@@ -106,7 +106,7 @@ class ChurnResult
   def avg_churn_class_count
     sum = yaml_results[:churn][:class_churn].sum{|item| item["times_changed"].to_i}
     (sum.to_f / class_changes_count.to_f).round(2)
-  rescue Psych::SyntaxError, TypeError
+  rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
   rescue TypeError
     nil
@@ -115,7 +115,7 @@ class ChurnResult
   def avg_churn_method_count
     sum = yaml_results[:churn][:method_churn].sum{|item| item["times_changed"].to_i}
     (sum.to_f / method_changes_count.to_f).round(2)
-  rescue Psych::SyntaxError, TypeError
+  rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
   rescue TypeError
     nil
