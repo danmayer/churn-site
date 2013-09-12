@@ -185,6 +185,7 @@ post '/projects/add' do
       commit = gh_commit['sha']
       commit_data = gh_commit
       find_or_create_project(project_name, project_data, commit, commit_data)
+      
       flash[:notice] = "project #{project_name} created"
     rescue Octokit::NotFound
       flash[:notice] = "project not found try without full url or initial slash EX:'danmayer/churn'"
@@ -220,6 +221,7 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
     project = Project.add_project(project_name, project_data)
     project.add_commit(commit, commit_data)
     forward_to_deferred_server(project.name, commit)
+    forward_to_deferred_server(project.name, 'history')
   end
 end
 
