@@ -17,10 +17,9 @@ This is a web front-end and hooks that trigger builds, but all the data is power
 
 ## TODO
 
+* allow project to submit churn data via churn gem pushing results to the server
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * verify and test history is build in correct order (oldest first)
-* automatically build out history on first add or web hook hit
-* fix issues with class and method level churn
 * clean up / refactoring
 * test coverage
 * travis-ci
