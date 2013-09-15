@@ -14,7 +14,7 @@ class MyAppTest < Test::Unit::TestCase
 
   def test_root
     Project.stubs(:projects).returns([])
-    get '/'
+    get '/', {}, 'HTTP_ACCEPT' => 'text/html'
     assert_match 'churn', last_response.body
   end
 
@@ -31,7 +31,7 @@ class MyAppTest < Test::Unit::TestCase
                    :churn_results => churn_results)
     Project.stubs(:get_project).returns(project)
     Commit.stubs(:get_commit).returns(commit)
-    get '/danmayer/churn-site/commits/4f4d3ee27d1722cb71e8237b8e48bf475fc3b7c6'
+    get '/danmayer/churn-site/commits/4f4d3ee27d1722cb71e8237b8e48bf475fc3b7c6', {}, 'HTTP_ACCEPT' => 'text/html'
     assert_match 'danmayer/churn-site', last_response.body
   end
 

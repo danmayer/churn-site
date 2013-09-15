@@ -3,6 +3,7 @@ gem 'rake'
 gem 'sinatra'
 gem 'json'
 gem 'sinatra-flash'
+gem 'sinatra-contrib'
 gem 'redis'
 gem 'rest-client'
 gem 'addressable'
@@ -12,6 +13,7 @@ gem 'i18n'
 gem 'active_support'
 gem 'airbrake'
 gem 'churn', '0.0.32'
+
 
 group :production do
   gem 'unicorn'

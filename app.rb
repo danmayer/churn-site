@@ -2,6 +2,7 @@
 require 'json'
 require 'fileutils'
 require 'sinatra/flash'
+require 'sinatra/contrib'
 require 'redis'
 require 'rest-client'
 require 'open-uri'
@@ -60,11 +61,23 @@ before /.*/ do
   if request.host.match(/herokuapp.com/)
     redirect request.url.gsub("churn-site.herokuapp.com",'churn.picoappz.com'), 301
   end
+
+  if request.url.match(/.json$/)
+    request.accept.unshift('application/json')
+    request.path_info = request.path_info.gsub(/.json$/,'')
+  end
 end
 
-get '/' do
-  @projects = Project.projects
-  erb :index
+["/", "/index"].each do |path|
+  get path, :provides => [:html, :json] do
+    @projects = Project.projects
+    respond_to do |format|
+      format.json { 
+        Project.projects_as_json(@projects, request)
+      }
+      format.html { erb :index }
+    end
+  end
 end
 
 get '/about' do
@@ -75,11 +88,14 @@ get '/instructions' do
   erb :instructions
 end
 
-get '/*/commits/*' do |project_path, commit|
+get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
   if @project && @commit
-    erb :commit
+    respond_to do |format|
+      format.json { @commit.as_hash(request).to_json }
+      format.html { erb :commit }
+    end
   elsif @project
     flash[:error] = 'project commit not found'
     redirect "/#{@project.name}/"
@@ -164,10 +180,13 @@ get '/chart/*' do |project_path|
   erb :chart, :layout => false
 end 
 
-get '/*' do |project_path|
+get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
-    erb :project
+    respond_to do |format|
+      format.json { @project.as_hash(request).to_json }
+      format.html { erb :project }
+    end
   else
     flash[:error] = 'project not found'
     redirect '/'

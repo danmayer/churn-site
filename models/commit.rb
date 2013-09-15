@@ -94,6 +94,14 @@ class Commit
     @data = JSON.parse(data.to_json)
   end
 
+  def as_hash(request)
+    {
+      :project_name => @project_name,
+      :name => name,
+      :churn_results => churn_results.try(:yaml_results)
+    }
+  end
+
   private
   
 

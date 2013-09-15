@@ -5,6 +5,10 @@ class Project
     REDIS.hkeys(REDIS_KEY)
   end
 
+  def self.projects_as_json(projects, request)
+    projects.map{|proj| {:name => proj, :project_url => "#{request.url.gsub(/#{request.path}/,'')}/#{proj}.json"} }.to_json
+  end
+
   def self.add_project(name, data)
     REDIS.hset(REDIS_KEY, name, data.to_json)
     Project.new(name, data.to_json)
@@ -47,6 +51,13 @@ class Project
   
   def add_commit(commit, data)
     Commit.add_commit(@name, commit, data)
+  end
+
+  def as_hash(request)
+    {
+      :name => name,
+      :commits => sorted_commits.map{|commit| {:commit_url => "#{request.url.gsub(/#{request.path}/,'')}/#{name}/commits/#{commit.name}.json" } }
+    }
   end
 
   private
