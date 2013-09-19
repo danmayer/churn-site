@@ -158,7 +158,7 @@ get '/chart/*' do |project_path|
   if project
     #TODO move all this to project class
     @chartdata = REDIS.get("project_#{project.name}_chart_data")
-    if @chartdata
+    if @chartdata && @chartdata!=""
       @chartdata = JSON.parse(@chartdata)
     else
       series_labels = []
@@ -183,6 +183,7 @@ get '/chart/*' do |project_path|
                    }
                   ]
       }
+
       #TODO move all this to project class
       REDIS.set("project_#{project.name}_chart_data", @chartdata.to_json)
     end
