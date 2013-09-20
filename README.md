@@ -1,9 +1,16 @@
 churn-site
 ===
 
-A app to calculate and display churn on a project.
+A app to calculate and display code churn on a project.
 
 This is a web front-end and hooks that trigger builds, but all the data is powered by the [churn gem](https://github.com/danmayer/churn)
+
+It displays data like:
+
+* total files with churn above threshold
+* avg file, class, and method churn
+* the number of files over the avg file, class, and method churn
+* churn increase over time
 
 ## To Run Examples Locally
 
