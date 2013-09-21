@@ -156,37 +156,7 @@ get '/chart/*' do |project_path|
   project = Project.get_project(project_path)
 
   if project
-    #TODO move all this to project class
-    @chartdata = REDIS.get("project_#{project.name}_chart_data")
-    if @chartdata && @chartdata!=""
-      @chartdata = JSON.parse(@chartdata)
-    else
-      series_labels = []
-      series_data = []
-      project.sorted_commits.reverse.map do |commit|
-        if !series_labels.include?(commit.short_formatted_commit_datetime)
-          churn_results = commit.churn_results 
-          if churn_results.exists? && churn_results.file_changes!=nil
-            series_labels << commit.short_formatted_commit_datetime
-            series_data << churn_results.file_changes_count
-          end
-        end
-      end
-      
-      @chartdata = {
-        labels: series_labels,
-        datasets: [
-                   {
-                     fillColor: "rgba(151,187,205,0.5)",
-                     strokeColor: "rgba(151,187,205,1)",
-                     data: series_data
-                   }
-                  ]
-      }
-
-      #TODO move all this to project class
-      REDIS.set("project_#{project.name}_chart_data", @chartdata.to_json)
-    end
+    @chartdata = project.churn_chart_json
     erb :chart, :layout => false
   else
     flash[:error] = 'project not found'
@@ -256,8 +226,7 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
     forward_to_deferred_server(project.name, commit)
     forward_to_deferred_server(project.name, 'history')
   end
-  #TODO move all this to project class
-  REDIS.set("project_#{project_name}_chart_data", nil)
+  project.clear_caches
 end
 
 def forward_to_deferred_server(project, commit, options = {})
