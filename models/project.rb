@@ -62,7 +62,9 @@ class Project
 
   def churn_chart_json
     chartdata = REDIS.get("project_#{name}_chart_data")
-    if chartdata && chartdata.strip!="" && chartdata!='""' && chartdata!='null'
+    json_try = true
+    begin
+    if json_try==true && chartdata && chartdata.strip!="" && chartdata!='""' && chartdata!='null'
       chartdata = JSON.parse(chartdata)
     else
       series_labels = []
@@ -89,6 +91,11 @@ class Project
       }
 
       REDIS.set("project_#{name}_chart_data", chartdata.to_json)
+    end
+    rescue JSON::ParserError => error
+      puts "json error #{error} json looked like: #{chartdata}"
+      json_try = false
+      retry
     end
     chartdata
   end
