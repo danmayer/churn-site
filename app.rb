@@ -111,7 +111,13 @@ post '/*/commits/*' do |project_name, commit|
   rechurn       = params['rechurn'] || 'true'
   if @project && commit
     project_data = Octokit.repo project_name
-    gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
+    begin
+      gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
+    rescue Octokit::NotFound
+      msg = "commit not found, likely not on master branch (currently only supports master branch)"
+      flash[:error] = msg
+      redirect '/'
+    end
     commit = gh_commit['sha']
     commit_data = gh_commit
     puts "sending commit #{commit} with rechurn #{rechurn}"
