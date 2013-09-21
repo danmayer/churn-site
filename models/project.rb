@@ -62,7 +62,7 @@ class Project
 
   def churn_chart_json
     chartdata = REDIS.get("project_#{name}_chart_data")
-    if chartdata && chartdata!="" && chartdata!='""'
+    if chartdata && chartdata.strip!="" && chartdata!='""' && chartdata!='null'
       chartdata = JSON.parse(chartdata)
     else
       series_labels = []
