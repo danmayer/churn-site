@@ -77,7 +77,7 @@ class Project
         end
       end
       
-      @chartdata = {
+      chartdata = {
         labels: series_labels,
         datasets: [
                    {
