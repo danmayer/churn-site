@@ -64,34 +64,35 @@ class Project
     chartdata = REDIS.get("project_#{name}_chart_data")
     json_try = true
     begin
-    if json_try==true && chartdata && chartdata.strip!="" && chartdata!='""' && chartdata!='null'
-      chartdata = JSON.parse(chartdata)
-    else
-      series_labels = []
-      series_data = []
-      sorted_commits.reverse.map do |commit|
-        if !series_labels.include?(commit.short_formatted_commit_datetime)
-          churn_results = commit.churn_results 
-          if churn_results.exists? && churn_results.file_changes!=nil
-            series_labels << commit.short_formatted_commit_datetime
-            series_data << churn_results.file_changes_count
+      bad_json_data = ['',"\"\"",'""','null','"\"\""']
+      if json_try==true && chartdata && !bad_json_data.include?(chartdata.strip)
+        chartdata = JSON.parse(chartdata)
+      else
+        series_labels = []
+        series_data = []
+        sorted_commits.reverse.map do |commit|
+          if !series_labels.include?(commit.short_formatted_commit_datetime)
+            churn_results = commit.churn_results 
+            if churn_results.exists? && churn_results.file_changes!=nil
+              series_labels << commit.short_formatted_commit_datetime
+              series_data << churn_results.file_changes_count
+            end
           end
         end
+        
+        chartdata = {
+          labels: series_labels,
+          datasets: [
+                     {
+                       fillColor: "rgba(151,187,205,0.5)",
+                       strokeColor: "rgba(151,187,205,1)",
+                       data: series_data
+                     }
+                    ]
+        }
+        
+        REDIS.set("project_#{name}_chart_data", chartdata.to_json)
       end
-      
-      chartdata = {
-        labels: series_labels,
-        datasets: [
-                   {
-                     fillColor: "rgba(151,187,205,0.5)",
-                     strokeColor: "rgba(151,187,205,1)",
-                     data: series_data
-                   }
-                  ]
-      }
-
-      REDIS.set("project_#{name}_chart_data", chartdata.to_json)
-    end
     rescue JSON::ParserError => error
       puts "json error #{error} json looked like: #{chartdata}"
       json_try = false
@@ -99,7 +100,7 @@ class Project
     end
     chartdata
   end
-
+  
   def clear_caches
     REDIS.set("project_#{name}_chart_data", nil)
   end
