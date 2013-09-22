@@ -113,7 +113,7 @@ post '/*/commits/*' do |project_name, commit|
     project_data = Octokit.repo project_name
     begin
       gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
-    rescue Octokit::NotFound
+    rescue Octokit::NotFound, Octokit::BadGateway
       msg = "commit not found, likely not on master branch (currently only supports master branch)"
       flash[:error] = msg
       redirect '/'
