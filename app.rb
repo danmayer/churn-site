@@ -147,7 +147,7 @@ post '/churn/*' do |project_path|
         forward_to_deferred_server(@project.name, 'history')
       end
         flash[:notice] = 'project building history (refresh soon)'
-    rescue RestClient::InternalServerError => error
+    rescue RestClient::InternalServerError, RestClient::ResourceNotFound => error
       puts "error on #{project_path} error #{error}"
       flash[:error] = 'error creating project history, try again'
     end
@@ -196,6 +196,10 @@ post '/projects/add' do
       find_or_create_project(project_name, project_data, commit, commit_data)
       
       flash[:notice] = "project #{project_name} created"
+    rescue RestClient::InternalServerError, RestClient::ResourceNotFound => error
+      error_msg = "error adding #{project_name} error #{error}"
+      puts error_msg
+      flash[:error] = error_msg
     rescue Octokit::NotFound
       flash[:notice] = "project not found try without full url or initial slash EX:'danmayer/churn'"
     end
