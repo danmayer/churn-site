@@ -26,7 +26,6 @@ It displays data like:
 
 * allow project to submit churn data via churn gem pushing results to the server
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
-* verify and test history is build in correct order (oldest first)
 * clean up / refactoring
 * test coverage
 * travis-ci
