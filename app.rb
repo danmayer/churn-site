@@ -240,16 +240,24 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
 end
 
 def forward_to_deferred_server(project, commit, options = {})
-  request_timeout = options.fetch(:timeout){ 6 }
-  request_open_timeout    = options.fetch(:open_timeout){ 6 }
-  resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
-                                      :timeout => request_timeout, 
-                                      :open_timeout => request_open_timeout)
-  
-  resource.post(:signature => DEFERRED_SERVER_TOKEN,
-                :project => project,
-                :commit => commit,
-                :command => 'churn --yaml')
-rescue RestClient::RequestTimeout
-  puts "timed out during deferred-server hit"
+  attempts = 0
+  begin
+    request_timeout = options.fetch(:timeout){ 6 }
+    request_open_timeout    = options.fetch(:open_timeout){ 6 }
+    resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
+                                        :timeout => request_timeout, 
+                                        :open_timeout => request_open_timeout)
+    
+    resource.post(:signature => DEFERRED_SERVER_TOKEN,
+                  :project => project,
+                  :commit => commit,
+                  :command => 'churn --yaml')
+  rescue  RestClient::ResourceNotFound
+    attempts +=1
+    retry if attempts < 3
+  rescue RestClient::RequestTimeout
+    attempts +=1
+    retry if attempts < 2
+    puts "timed out during deferred-server hit"
+  end
 end
