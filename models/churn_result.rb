@@ -15,6 +15,11 @@ class ChurnResult
     "project_results/results_for_#{@project_name}_#{@commit}_churn"
   end
   
+  def write_results(churn_results)
+    churn_results = churn_results.to_json unless churn_results.is_a?(String)
+    write_file(filename, churn_results)
+  end
+
   def data
     @data ||= begin
                 @data = get_file(filename)
@@ -46,11 +51,19 @@ class ChurnResult
   end
 
   def formatted_results
-    @formatted_results ||= Churn::ChurnCalculator.to_s(yaml_results[:churn])
+    @formatted_results ||= Churn::ChurnCalculator.to_s(parsed_results[:churn])
   rescue Psych::SyntaxError
     "error parsing results:\n #{results}"
   rescue TypeError
     "error in results:\n #{results}"
+  end
+
+  def parsed_results
+    if data['churn']
+      HashWithIndifferentAccess.new(data)
+    else
+      yaml_results
+    end
   end
   
   def yaml_results
@@ -58,7 +71,7 @@ class ChurnResult
   end
 
   def file_changes
-    yaml_results[:churn][:changes]
+    parsed_results[:churn][:changes]
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError
@@ -66,7 +79,7 @@ class ChurnResult
   end
 
   def class_changes
-    yaml_results[:churn][:class_churn]
+    parsed_results[:churn][:class_churn]
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError
@@ -74,7 +87,7 @@ class ChurnResult
   end
 
   def method_changes
-    yaml_results[:churn][:method_churn]
+    parsed_results[:churn][:method_churn]
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError
@@ -95,7 +108,7 @@ class ChurnResult
 
   def avg_churn_file_count
     #todo normal the hash it is symbols here and string elsewhere
-    sum = yaml_results[:churn][:changes].sum{|item| item[:times_changed].to_i}
+    sum = parsed_results[:churn][:changes].sum{|item| item[:times_changed].to_i}
     (sum.to_f / file_changes_count.to_f).round(2)
   rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
@@ -104,7 +117,7 @@ class ChurnResult
   end
 
   def avg_churn_class_count
-    sum = yaml_results[:churn][:class_churn].sum{|item| item["times_changed"].to_i}
+    sum = parsed_results[:churn][:class_churn].sum{|item| item["times_changed"].to_i}
     (sum.to_f / class_changes_count.to_f).round(2)
   rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
@@ -113,7 +126,7 @@ class ChurnResult
   end
 
   def avg_churn_method_count
-    sum = yaml_results[:churn][:method_churn].sum{|item| item["times_changed"].to_i}
+    sum = parsed_results[:churn][:method_churn].sum{|item| item["times_changed"].to_i}
     (sum.to_f / method_changes_count.to_f).round(2)
   rescue Psych::SyntaxError, TypeError, FloatDomainError
     nil
@@ -122,7 +135,7 @@ class ChurnResult
   end
 
   def high_churn_file_count
-    yaml_results[:churn][:changes].select{|item| item[:times_changed].to_f > avg_churn_file_count}.length
+    parsed_results[:churn][:changes].select{|item| item[:times_changed].to_f > avg_churn_file_count.to_f}.length
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError
@@ -130,7 +143,7 @@ class ChurnResult
   end
 
   def high_churn_class_count
-    yaml_results[:churn][:class_churn].select{|item| item["times_changed"].to_f > avg_churn_class_count}.length
+    parsed_results[:churn][:class_churn].select{|item| item["times_changed"].to_f > avg_churn_class_count.to_f}.length
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError
@@ -138,7 +151,7 @@ class ChurnResult
   end
 
   def high_churn_method_count
-    yaml_results[:churn][:method_churn].select{|item| item["times_changed"].to_f > avg_churn_method_count}.length
+    parsed_results[:churn][:method_churn].select{|item| item["times_changed"].to_f > avg_churn_method_count.to_f}.length
   rescue Psych::SyntaxError, TypeError
     nil
   rescue TypeError

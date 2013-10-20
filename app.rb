@@ -211,6 +211,17 @@ end
 
 #handles github post push webhook calls
 post '/' do
+  if params['payload']
+    receive_github_payload
+  else
+    receive_churn_client_payload
+  end
+end
+
+private
+
+def receive_github_payload
+  puts "receiving github post commit hook payload"
   push = JSON.parse(params['payload'])
   project_url = push['repository']['url']
   project_name = project_url.gsub(/.*com\//,'')
@@ -220,7 +231,40 @@ post '/' do
   find_or_create_project(project_name, project_data, commit, commit_data)
 end
 
-private
+def receive_churn_client_payload
+  puts "receiving churn client payload"
+  results = JSON.parse(params['results'])
+  if results
+    project_name  = results['name']
+    commit        = results['revision']
+    churn_results = results['data'] 
+    begin
+      project_data = Octokit.repo project_name
+      begin
+        gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
+      rescue Octokit::NotFound, Octokit::BadGateway
+        msg = "commit not found, likely not on master branch (currently only supports master branch)"
+        flash[:error] = msg
+        puts msg
+        msg
+      end
+      commit = gh_commit['sha']
+      commit_data = gh_commit
+      find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => 'false')
+      ChurnResult.new(project_name, commit).write_results(churn_results)
+      puts "save churn results #{churn_results}"
+      'OK'
+    rescue Octokit::NotFound
+      msg = "project not found, name should be like 'username/project_name' without starting slash"
+      puts msg
+      msg
+    end
+  else
+    msg = 'params for churn results must be wrapped in a results param'
+    puts msg
+    msg
+  end
+end
 
 def find_or_create_project(project_name, project_data, commit, commit_data, options = {})
   if project = Project.get_project(project_name)
