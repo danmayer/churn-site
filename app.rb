@@ -240,25 +240,25 @@ def receive_churn_client_payload
     churn_results = results['data'] 
     begin
       project_data = Octokit.repo project_name
+    rescue Octokit::NotFound
+      #non public project, ignore other project data besides the name
+      project_data = {}
+    end
+    commit_data = 
       begin
         gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
       rescue Octokit::NotFound, Octokit::BadGateway
-        msg = "commit not found, likely not on master branch (currently only supports master branch)"
-        flash[:error] = msg
-        puts msg
-        msg
+        #non public project, ignore other project data besides the name
+        commit_data = {'sha' => commit,
+        'timestamp' => Time.now,
+        'message' => 'unknown: pushed via churn',
+        'author' => 'unknown: pushed via churn'
+      }
       end
-      commit = gh_commit['sha']
-      commit_data = gh_commit
-      find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => 'false')
-      ChurnResult.new(project_name, commit).write_results(churn_results)
-      puts "save churn results #{churn_results}"
-      'OK'
-    rescue Octokit::NotFound
-      msg = "project not found, name should be like 'username/project_name' without starting slash"
-      puts msg
-      msg
-    end
+    find_or_create_project(project_name, project_data, commit, commit_data, :rechurn => 'false')
+    ChurnResult.new(project_name, commit).write_results(churn_results)
+    puts "save churn results #{churn_results}"
+    'OK'
   else
     msg = 'params for churn results must be wrapped in a results param'
     puts msg
@@ -277,8 +277,10 @@ def find_or_create_project(project_name, project_data, commit, commit_data, opti
   else
     project = Project.add_project(project_name, project_data)
     project.add_commit(commit, commit_data)
-    forward_to_deferred_server(project.name, commit)
-    forward_to_deferred_server(project.name, 'history')
+    if options[:rechurn]==nil || options[:rechurn]=='true'
+      forward_to_deferred_server(project.name, commit)
+      forward_to_deferred_server(project.name, 'history')
+    end
   end
   project.clear_caches
 end
