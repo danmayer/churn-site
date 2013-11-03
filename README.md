@@ -18,7 +18,7 @@ It displays data like:
     #or
     bundle exec rackup -p 3000
     #or with dev procfile for shotgun reloading
-    foreman start -f Procfile.dev -e prod.env
+    foreman start -f Procfile.dev -e .env.development
     #or local with production data (make sure red is and other env vars are set)
     RACK_ENV=production foreman start -f Procfile
 
@@ -30,6 +30,7 @@ It displays data like:
 * test coverage
 * travis-ci
 * build a working heroku console that loads all the right classes
+* 
 
 ## Contributing
 

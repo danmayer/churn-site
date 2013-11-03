@@ -11,3 +11,7 @@ api/log/*
 Procfile.prod
 log/*
 prod.env
+.env
+.env.production
+.env.test
+.env.development

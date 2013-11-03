@@ -33,6 +33,8 @@ GEM
     coderay (1.0.7)
     debug_inspector (0.0.2)
     dotenv (0.8.0)
+    dotenv-rails (0.8.0)
+      dotenv (= 0.8.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     excon (0.25.3)
@@ -140,6 +142,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   churn (= 0.0.32)
+  dotenv-rails
   fog
   foreman
   i18n
