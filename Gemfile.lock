@@ -31,7 +31,7 @@ GEM
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.1)
     coderay (1.0.7)
-    coverband (0.0.5)
+    coverband (0.0.7)
       json
       simplecov
     debug_inspector (0.0.2)
@@ -149,7 +149,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   churn (= 0.0.32)
-  coverband (>= 0.0.5)
+  coverband (>= 0.0.7)
   dotenv-rails
   fog
   foreman
