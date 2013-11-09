@@ -4,6 +4,9 @@ require 'rake/testtask'
 require 'dotenv'
 DEFAULT_ENV = ENV['RACK_ENV'] || 'development'
 Dotenv.load ".env.#{DEFAULT_ENV}", '.env'
+require 'json'
+require 'redis'
+require 'coverband'
 
 task :default => :test
 
@@ -25,4 +28,20 @@ task :push_env do
   cmd = "heroku config:set #{env_pairs.join(' ')}"
   puts cmd
   puts `#{cmd}`
+end
+
+desc "report unused lines"
+task :coverband do
+  baseline = JSON.parse(File.read('./tmp/coverband_baseline.json'))
+  # merge more {'/Users/danmayer/projects/cover_band_server/app.rb' => Array.new(31,1)}
+  coverband_options = {'existing_coverage' => baseline}
+  Coverband::Reporter.report(Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1), coverband_options)
+end
+
+desc "get coverage baseline"
+task :coverband_baseline do
+  Coverband::Reporter.baseline {
+    require 'sinatra'
+    require './app.rb'
+  }
 end

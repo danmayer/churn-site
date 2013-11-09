@@ -29,8 +29,7 @@ It displays data like:
 * clean up / refactoring
 * test coverage
 * travis-ci
-* build a working heroku console that loads all the right classes
-* 
+* build a working heroku console that loads all the right classes (using dotenv to manage vars now follow https://devcenter.heroku.com/articles/config-vars for best env var management)
 
 ## Contributing
 
