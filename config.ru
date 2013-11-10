@@ -3,7 +3,7 @@ require 'coverband'
 
 use Coverband::Middleware, :root => Dir.pwd,
           :reporter => Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1),
-	  :ignore => ['vendor/bundle'],
+	  :ignore => ['vendor'],
 	  :percentage => 100.0
 
 require './app'

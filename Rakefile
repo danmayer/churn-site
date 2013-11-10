@@ -34,7 +34,8 @@ desc "report unused lines"
 task :coverband do
   baseline = JSON.parse(File.read('./tmp/coverband_baseline.json'))
   # merge more {'/Users/danmayer/projects/cover_band_server/app.rb' => Array.new(31,1)}
-  coverband_options = {'existing_coverage' => baseline}
+  root_paths = ['/app/']
+  coverband_options = {:existing_coverage => baseline, :roots => root_paths}
   Coverband::Reporter.report(Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1), coverband_options)
 end
 
