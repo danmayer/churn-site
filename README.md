@@ -25,6 +25,8 @@ It displays data like:
 ## TODO
 
 * allow project to submit churn data via churn gem pushing results to the server
+  * This is done document it
+* reduce dependancies and make it easier for people to run churn-site 
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * clean up / refactoring
 * test coverage
