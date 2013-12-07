@@ -12,6 +12,8 @@ It displays data like:
 * the number of files over the avg file, class, and method churn
 * churn increase over time
 
+[![Build Status](https://secure.travis-ci.org/danmayer/churn-site.png)](http://travis-ci.org/danmayer/churn-site)
+
 ## To Run Examples Locally
 
     foreman start
@@ -29,6 +31,7 @@ It displays data like:
     
     #heroku remote console in production more
     heroku run script/heroku-console
+
 
 ## TODO
 
