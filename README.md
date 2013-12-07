@@ -22,6 +22,14 @@ It displays data like:
     #or local with production data (make sure red is and other env vars are set)
     RACK_ENV=production foreman start -f Procfile
 
+## Console
+
+    #local console
+    bundle exec script/console
+    
+    #heroku remote console in production more
+    heroku run script/heroku-console
+
 ## TODO
 
 * allow project to submit churn data via churn gem pushing results to the server
@@ -30,7 +38,7 @@ It displays data like:
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * clean up / refactoring
 * test coverage
-* build a working heroku console that loads all the right classes (using dotenv to manage vars now follow https://devcenter.heroku.com/articles/config-vars for best env var management)
+* better var management... (using dotenv to manage vars now follow https://devcenter.heroku.com/articles/config-vars for best env var management)
 
 ## Contributing
 
