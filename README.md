@@ -30,7 +30,6 @@ It displays data like:
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * clean up / refactoring
 * test coverage
-* travis-ci
 * build a working heroku console that loads all the right classes (using dotenv to manage vars now follow https://devcenter.heroku.com/articles/config-vars for best env var management)
 
 ## Contributing

@@ -28,6 +28,7 @@ DEFERRED_CHURN_TOKEN     = ENV['DEFERRED_CHURN_TOKEN']
 Octokit.client_id        = ENV['DS_GH_Client_ID']
 Octokit.client_secret    = ENV['DS_GH_Client_Secret']
 
+set :run, false if defined?(SKIP_SERVER)
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :root, File.dirname(__FILE__)
 enable :logging
