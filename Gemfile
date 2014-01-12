@@ -15,7 +15,7 @@ gem 'active_support'
 gem 'airbrake'
 gem 'churn', '0.0.32'
 gem 'dotenv-rails'
-gem 'coverband', '>= 0.0.8'
+gem 'coverband', '>= 0.0.15'
 
 group :production do
   gem 'unicorn'

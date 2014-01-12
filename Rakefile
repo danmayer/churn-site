@@ -30,13 +30,16 @@ task :push_env do
   puts `#{cmd}`
 end
 
+Coverband.configure do |config|
+  config.redis             =  Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1)
+  config.coverage_baseline = JSON.parse(File.read('./tmp/coverband_baseline.json')) if File.exists?('./tmp/coverband_baseline.json')
+  config.root_paths        = ['/app/']
+  config.ignore            = ['vendor']
+end
+
 desc "report unused lines"
 task :coverband do
-  baseline = JSON.parse(File.read('./tmp/coverband_baseline.json'))
-  # merge more {'/Users/danmayer/projects/cover_band_server/app.rb' => Array.new(31,1)}
-  root_paths = ['/app/']
-  coverband_options = {:existing_coverage => baseline, :roots => root_paths}
-  Coverband::Reporter.report(Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1), coverband_options)
+  Coverband::Reporter.report
 end
 
 desc "get coverage baseline"

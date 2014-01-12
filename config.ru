@@ -1,10 +1,17 @@
 require 'sinatra'
 require 'coverband'
 
-use Coverband::Middleware, :root => Dir.pwd,
-          :reporter => Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1),
-	  :ignore => ['vendor'],
-	  :percentage => 60.0
+Coverband.configure do |config|
+  config.root              = Dir.pwd
+  config.redis             = Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1)
+  config.root_paths        = ['/app/']
+  config.ignore            = ['vendor']
+  config.percentage        = 60.0
+  # config.stats             = statsd
+  config.verbose           = true
+end
+
+use Coverband::Middleware
 
 require './app'
 
