@@ -16,6 +16,7 @@ gem 'airbrake'
 gem 'churn', '0.0.32'
 gem 'dotenv-rails'
 gem 'coverband', '>= 0.0.15'
+gem "statsd-ruby"
 
 group :production do
   gem 'unicorn'
