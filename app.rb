@@ -157,7 +157,7 @@ post '/churn/*' do |project_path|
     end
     redirect "/#{@project.name}"
   else
-    flash[:error] = 'churn project not found'
+    flash[:error] = 'churn project not found' if project_path.strip.length > 0
     redirect '/'
   end
 end
