@@ -157,7 +157,7 @@ post '/churn/*' do |project_path|
     end
     redirect "/#{@project.name}"
   else
-    flash[:error] = 'churn project not found' if project_path.strip.length > 0
+    flash[:error] = 'churn project not found'
     redirect '/'
   end
 end
@@ -182,7 +182,7 @@ get '/*', :provides => [:html, :json] do |project_path|
       format.html { erb :project }
     end
   else
-    flash[:error] = 'existing project not found, please add it'
+    flash[:error] = 'existing project not found, please add it' if project_path.strip.length > 0
     redirect '/'
   end
 end
