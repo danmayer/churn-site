@@ -188,7 +188,7 @@ get '/*', :provides => [:html, :json] do |project_path|
     end
   else
     if project_path.strip.length > 0 && project_path!='favicon.ico'
-      flash[:error] = "existing project #{Rack::Utils.escape_html(project_path)} not found, please add it"
+      flash[:error] = "existing project not found, please add it"
     end
     redirect '/'
   end
