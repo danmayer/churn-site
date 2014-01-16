@@ -104,7 +104,7 @@ get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
     flash[:error] = 'project commit not found'
     redirect "/#{@project.name}/"
   else
-    flash[:error] = 'project not found'
+    flash[:error] = 'project for the commit not found'
     redirect "/"
   end
 end
@@ -157,7 +157,7 @@ post '/churn/*' do |project_path|
     end
     redirect "/#{@project.name}"
   else
-    flash[:error] = 'project not found'
+    flash[:error] = 'churn project not found'
     redirect '/'
   end
 end
@@ -169,7 +169,7 @@ get '/chart/*' do |project_path|
     @chartdata = project.churn_chart_json
     erb :chart, :layout => false
   else
-    flash[:error] = 'project not found'
+    flash[:error] = 'project to chart not found'
     redirect '/'
   end
 end 
@@ -182,7 +182,7 @@ get '/*', :provides => [:html, :json] do |project_path|
       format.html { erb :project }
     end
   else
-    flash[:error] = 'project not found'
+    flash[:error] = 'existing project not found, please add it'
     redirect '/'
   end
 end
