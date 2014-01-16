@@ -34,6 +34,11 @@ set :root, File.dirname(__FILE__)
 enable :logging
 enable :sessions
 
+use Rack::Session::Cookie, key: 'churnsite',
+    path: '/',
+    expire_after: 24400,
+    secret: (ENV['DS_GH_Client_Secret'] || 'dev')
+
 configure :development do
   require "better_errors"
   use BetterErrors::Middleware
@@ -182,7 +187,7 @@ get '/*', :provides => [:html, :json] do |project_path|
       format.html { erb :project }
     end
   else
-    flash[:error] = 'existing project not found, please add it' if project_path.strip.length > 0
+    flash[:error] = "existing project #{Rack::Utils.escape_html(project_path)} not found, please add it" if project_path.strip.length > 0
     redirect '/'
   end
 end
