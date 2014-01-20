@@ -143,6 +143,16 @@ get '/instructions' do
   erb :instructions
 end
 
+##~ a = s.apis.add
+##
+##~ a.set :path => "/{project_path}/commits/{commit}", :format => "json", :description => "Access to a projects single commit data"
+##
+##~ op = a.operations.add
+##~ op.set :httpMethod => "GET", :deprecated => false, :nickname => "get_project_commit"
+##~ op.summary = "Returns a single commit by commit id and project_path"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
@@ -190,8 +200,17 @@ post '/*/commits/*' do |project_name, commit|
   end
 end
 
-
-post '/churn/*' do |project_path|
+##~ a = s.apis.add
+##
+##~ a.set :path => "/churn/{project_path}", :format => "json", :description => "Starts generating churn report against HEAD of project_path"
+##
+##~ op = a.operations.add
+##~ op.set :httpMethod => "POST", :deprecated => false, :nickname => "churn_project"
+##~ op.summary = "Starts generating churn report against HEAD of project_path"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :dataType => "string", :allowMultiple => false, :required => false, :paramType => "query"
+##
+post '/churn/*', :provides => [:html, :json] do |project_path|
   @project      = Project.get_project(project_path)
   if @project
     begin
@@ -201,7 +220,10 @@ post '/churn/*' do |project_path|
       else
         forward_to_deferred_server(@project.name, 'history')
       end
-        flash[:notice] = 'project building history (refresh soon)'
+      respond_to do |format|
+        format.json { @project.as_hash(request).to_json }
+        format.html { flash[:notice] = 'project building history (refresh soon)' }
+      end
     rescue RestClient::InternalServerError, RestClient::ResourceNotFound => error
       puts "error on #{project_path} error #{error}"
       flash[:error] = 'error creating project history, try again'
