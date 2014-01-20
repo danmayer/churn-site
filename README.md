@@ -21,7 +21,7 @@ It displays data like:
     bundle exec rackup -p 3000
     #or with dev procfile for shotgun reloading
     foreman start -f Procfile.dev -e .env.development
-    #or local with production data (make sure red is and other env vars are set)
+    #or local with production data (make sure redis and other env vars are set)
     RACK_ENV=production foreman start -f Procfile
 
 ## Console

@@ -30,6 +30,11 @@ task :push_env do
   puts `#{cmd}`
 end
 
+desc "generate swagger docs"
+task :swagger do
+  system 'bundle exec source2swagger -f app.rb -c "##~" -o public/api'
+end
+
 Coverband.configure do |config|
   config.redis             =  Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1)
   config.coverage_baseline = JSON.parse(File.read('./tmp/coverband_baseline.json')) if File.exists?('./tmp/coverband_baseline.json')

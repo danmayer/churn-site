@@ -17,6 +17,8 @@ gem 'churn', '0.0.32'
 gem 'dotenv-rails'
 gem 'coverband', '>= 0.0.15'
 gem "statsd-ruby"
+gem 'source2swagger'
+gem "sinatra-cross_origin"
 
 group :production do
   gem 'unicorn'

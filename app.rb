@@ -12,6 +12,8 @@ require 'octokit'
 require 'active_support/core_ext'
 require 'airbrake'
 require 'dotenv'
+require 'sinatra/cross_origin'
+
 DEFAULT_ENV = ENV['RACK_ENV'] || 'development'
 Dotenv.load ".env.#{DEFAULT_ENV}", '.env'
 
@@ -34,6 +36,12 @@ set :root, File.dirname(__FILE__)
 enable :logging
 enable :sessions
 
+set :allow_origin, :any
+set :allow_methods, [:get, :post, :options]
+set :allow_credentials, true
+set :max_age, "1728000"
+set :expose_headers, ['Content-Type']
+
 use Rack::Session::Cookie, key: 'churnsite',
     path: '/',
     expire_after: 24400,
@@ -43,6 +51,7 @@ configure :development do
   require "better_errors"
   use BetterErrors::Middleware
   BetterErrors.application_root = File.dirname(__FILE__)
+  enable :cross_origin
 end
 
 configure :production do
@@ -56,6 +65,7 @@ configure :production do
   use Rack::Catcher
   use Airbrake::Rack
   set :raise_errors, true
+  enable :cross_origin
 end
 
 helpers do
@@ -77,6 +87,43 @@ before /.*/ do
   end
 end
 
+# redict to index fil
+get '/docs/?' do
+  redirect '/docs/index.html'
+end
+
+
+# returns the api docs for the resource listing
+  get '/api-docs/?', :provides => [:json] do
+    res = File.read(File.join('public', 'api', 'api-docs.json'))
+    body res
+    status 200
+  end
+
+# returns the api docs for each path
+get '/api-docs/:api', :provides => [:json] do
+  res = File.read(File.join('public', 'api', "#{params[:api].to_s}.json"))
+  body res
+  status 200
+end
+
+# swaggerBase = "http://localhost:5000"
+##~ swaggerBase = "http://churn.picoappz.com"
+##~ root = source2swagger.namespace("api-docs")
+##~ root.basePath = swaggerBase
+##~ root.swaggerVersion = "1.1"
+##~ root.apiVersion = "1.0"
+##~ root.apis.add :path => "/api-docs/churn", :description => "A churn code metrics api"
+
+##~ s = source2swagger.namespace("churn")
+##~ s.basePath =  swaggerBase
+##~ s.swaggerVersion = "1.1"
+##~ s.apiVersion = "1.0"
+##~ s.resourcePath = "/index"
+##~ a = s.apis.add
+##~ a.set :path => "/index", :format => "json", :description => "Access to all of the churned projects."
+##
+##~ a.operations.add :httpMethod => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
 ["/", "/index"].each do |path|
   get path, :provides => [:html, :json] do
     @projects = Project.projects
@@ -179,6 +226,15 @@ get '/chart/*' do |project_path|
   end
 end 
 
+##~ a = s.apis.add
+##
+##~ a.set :path => "/{project_name}", :format => "json", :description => "Access to a churn project"
+##
+##~ op = a.operations.add
+##~ op.set :httpMethod => "GET", :deprecated => false, :nickname => "get_project"
+##~ op.summary = "Returns a single churn project by project_name"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
@@ -194,6 +250,16 @@ get '/*', :provides => [:html, :json] do |project_path|
   end
 end
 
+
+##~ a = s.apis.add
+##
+##~ a.set :path => "/projects/add", :format => "json", :description => "Create a new churn project resource"
+##
+##~ op = a.operations.add
+##~ op.set :httpMethod => "POST", :deprecated => false, :nickname => "create_project"
+##~ op.summary = "creates a new churn project by project_name"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "query"
+##
 post '/projects/add' do
   project_name = params['project_name']
   #fix starting with a slash if they did that
