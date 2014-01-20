@@ -1,1 +1,1 @@
-{"basePath":"http://churn.picoappz.com","swaggerVersion":"1.1","apiVersion":"1.0","apis":[{"path":"/api-docs/churn","description":"A churn code metrics api"}]}
+{"basePath":"http://churn.picoappz.com","swaggerVersion":"1.2","apiVersion":"1.0","apis":[{"path":"/churn","description":"A churn code metrics api"}]}

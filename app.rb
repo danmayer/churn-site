@@ -110,9 +110,9 @@ end
 ##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
 ##~ root.basePath = swaggerBase
-##~ root.swaggerVersion = "1.1"
+##~ root.swaggerVersion = "1.2"
 ##~ root.apiVersion = "1.0"
-##~ root.apis.add :path => "/api-docs/churn", :description => "A churn code metrics api"
+##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
 
 ##~ s = source2swagger.namespace("churn")
 ##~ s.basePath =  swaggerBase
