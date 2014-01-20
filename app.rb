@@ -106,7 +106,7 @@ get '/api-docs/:api', :provides => [:json] do
   status 200
 end
 
-# swaggerBase = "http://localhost:5000"
+## swaggerBase = "http://localhost:5000"
 ##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
 ##~ root.basePath = swaggerBase
