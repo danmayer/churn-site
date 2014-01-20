@@ -33,6 +33,10 @@ It displays data like:
     heroku run script/heroku-console
 
 
+## Api Docs
+
+   The documentation for the churn api can be found at [churn api docs](http://churn.picoappz.com/docs).
+
 ## TODO
 
 * allow project to submit churn data via churn gem pushing results to the server
