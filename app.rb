@@ -122,7 +122,7 @@ end
 ##~ s.produces = ["application/json"]
 ## models
 ##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "long"}, :name => {:type => "string"}}}
-##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "long"}, :category => {:type => "string"}, :tags => {:type => "Array", :items => {:$ref => "Tag"}}, :status => {:type => "string"}, :name => {:type => "string"}, :photoUrls => {:items => {:type => "string"}, :type => "Array"}}}
+##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "long"}, :category => {:type => "string"}, :tags => {:type => "Array", :items => {:$ref => "string"}}, :status => {:type => "string"}, :name => {:type => "string"}, :photoUrls => {:items => {:type => "string"}, :type => "Array"}}}
 
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
