@@ -112,17 +112,33 @@ end
 ##~ root.basePath = swaggerBase
 ##~ root.swaggerVersion = "1.2"
 ##~ root.apiVersion = "1.0"
+##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
 ##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
 
 ##~ s = source2swagger.namespace("churn")
 ##~ s.basePath =  swaggerBase
 ##~ s.swaggerVersion = "1.1"
 ##~ s.apiVersion = "1.0"
+##~ s.produces = ["application/json"]
+## models
+##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "long"}, :name => {:type => "string"}}}
+##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "long"}, :category => {:type => "string"}, :tags => {:type => "Array", :items => {:$ref => "Tag"}}, :status => {:type => "string"}, :name => {:type => "string"}, :photoUrls => {:items => {:type => "string"}, :type => "Array"}}}
+
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
 ##~ a.set :path => "/index", :format => "json", :description => "Access to all of the churned projects."
 ##
-##~ a.operations.add :httpMethod => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
+##~ op = a.operations.add
+##~ op.responseClass = "Project"
+##~ op.set :httpMethod => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
+##~ op.summary = "Returns a list of all the churn projects"  
+##
+##  declaring errors for the operation
+##~ err = op.errorResponses.add 
+##~ err.set :reason => "no projects found", :code => 404
+##~ op.errorResponses.add :reason => "Invalid or Empty Redis supplied", :code => 400
+##
+
 ["/", "/index"].each do |path|
   get path, :provides => [:html, :json] do
     @projects = Project.projects
