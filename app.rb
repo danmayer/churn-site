@@ -121,24 +121,22 @@ end
 ##~ s.apiVersion = "1.0"
 ##~ s.produces = ["application/json"]
 ## models
-##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "long"}, :name => {:type => "string"}}}
-##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "long"}, :category => {:type => "string"}, :tags => {:type => "Array", :items => {:$ref => "string"}}, :status => {:type => "string"}, :name => {:type => "string"}, :photoUrls => {:items => {:type => "string"}, :type => "Array"}}}
+##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
+##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
+##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "Array", :items => {:commit_url => "string"}}}}
 
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
 ##~ a.set :path => "/index", :format => "json", :description => "Access to all of the churned projects."
 ##
 ##~ op = a.operations.add
-##~ op.responseClass = "Project"
+##~ op.responseClass = "MinProject"
 ##~ op.set :httpMethod => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
 ##~ op.summary = "Returns a list of all the churn projects"  
 ##
 ##  declaring errors for the operation
 ##~ err = op.errorResponses.add 
 ##~ err.set :reason => "no projects found", :code => 404
-##~ op.errorResponses.add :reason => "Invalid or Empty Redis supplied", :code => 400
-##
-
 ["/", "/index"].each do |path|
   get path, :provides => [:html, :json] do
     @projects = Project.projects
@@ -268,10 +266,14 @@ end
 ##~ a.set :path => "/{project_name}", :format => "json", :description => "Access to a churn project"
 ##
 ##~ op = a.operations.add
+##~ op.responseClass = "Project"
 ##~ op.set :httpMethod => "GET", :deprecated => false, :nickname => "get_project"
 ##~ op.summary = "Returns a single churn project by project_name"
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
+##  declaring errors for the operation
+##~ err = op.errorResponses.add 
+##~ err.set :reason => "no project found", :code => 404
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
