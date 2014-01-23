@@ -113,7 +113,7 @@ end
 ##~ root.swaggerVersion = "1.2"
 ##~ root.apiVersion = "1.0"
 ##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
-##~ root.apis.add :path => "/api-docs/churn", :description => "A churn code metrics api"
+##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
 
 ##~ s = source2swagger.namespace("churn")
 ##~ s.basePath =  swaggerBase
