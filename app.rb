@@ -129,7 +129,7 @@ end
 ##~ a.set :path => "/index", :produces => ["application/json"], :description => "Access to all of the churned projects."
 ##
 ##~ op = a.operations.add
-##~ op.responseClass = "MinProject"
+##~ op.type = "MinProject"
 ##~ op.set :method => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
 ##~ op.summary = "Returns a list of all the churn projects"  
 ##
@@ -161,6 +161,7 @@ end
 ##~ a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
 ##~ op = a.operations.add
+##~ op.type = "array"
 ##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
 ##~ op.summary = "Returns a single commit by commit id and project_path"
 ##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
@@ -265,7 +266,7 @@ end
 ##~ a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
 ##
 ##~ op = a.operations.add
-##~ op.responseClass = "Project"
+##~ op.type = "Project"
 ##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project"
 ##~ op.summary = "Returns a single churn project by project_name"
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
@@ -294,6 +295,7 @@ end
 ##~ a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
 ##
 ##~ op = a.operations.add
+##~ op.type = "void"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
