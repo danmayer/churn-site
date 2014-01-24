@@ -106,6 +106,8 @@ get '/api-docs/:api', :provides => [:json] do
   status 200
 end
 
+## swaggerBase = "http://localhost:5000"
+##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
 ##~ root.swaggerVersion = "1.2"
 ##~ root.apiVersion = "1.0"
@@ -113,6 +115,7 @@ end
 ##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
 
 ##~ s = source2swagger.namespace("churn")
+##~ s.basePath =  swaggerBase
 ##~ s.swaggerVersion = "1.2"
 ##~ s.apiVersion = "1.0"
 ##~ s.produces = ["application/json"]
