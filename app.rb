@@ -106,18 +106,14 @@ get '/api-docs/:api', :provides => [:json] do
   status 200
 end
 
-## swaggerBase = "http://localhost:5000"
-##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
-##~ root.basePath = swaggerBase
 ##~ root.swaggerVersion = "1.2"
 ##~ root.apiVersion = "1.0"
 ##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
 ##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
 
 ##~ s = source2swagger.namespace("churn")
-##~ s.basePath =  swaggerBase
-##~ s.swaggerVersion = "1.1"
+##~ s.swaggerVersion = "1.2"
 ##~ s.apiVersion = "1.0"
 ##~ s.produces = ["application/json"]
 ## models
@@ -127,11 +123,11 @@ end
 
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
-##~ a.set :path => "/index", :format => "json", :description => "Access to all of the churned projects."
+##~ a.set :path => "/index", :produces => ["application/json"], :description => "Access to all of the churned projects."
 ##
 ##~ op = a.operations.add
 ##~ op.responseClass = "MinProject"
-##~ op.set :httpMethod => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
+##~ op.set :method => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
 ##~ op.summary = "Returns a list of all the churn projects"  
 ##
 ##  declaring errors for the operation
@@ -159,13 +155,13 @@ end
 
 ##~ a = s.apis.add
 ##
-##~ a.set :path => "/{project_path}/commits/{commit}", :format => "json", :description => "Access to a projects single commit data"
+##~ a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
 ##~ op = a.operations.add
-##~ op.set :httpMethod => "GET", :deprecated => false, :nickname => "get_project_commit"
+##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
 ##~ op.summary = "Returns a single commit by commit id and project_path"
-##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
-##~ op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
@@ -216,13 +212,13 @@ end
 
 ##~ a = s.apis.add
 ##
-##~ a.set :path => "/churn/{project_path}", :format => "json", :description => "Starts generating churn report against HEAD of project_path"
+##~ a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
 ##
 ##~ op = a.operations.add
-##~ op.set :httpMethod => "POST", :deprecated => false, :nickname => "churn_project"
+##~ op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
 ##~ op.summary = "Starts generating churn report against HEAD of project_path"
-##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
-##~ op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :dataType => "string", :allowMultiple => false, :required => false, :paramType => "query"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :type => "string", :allowMultiple => false, :required => false, :paramType => "query"
 ##
 post '/churn/*', :provides => [:html, :json] do |project_path|
   @project      = Project.get_project(project_path)
@@ -263,17 +259,17 @@ end
 
 ##~ a = s.apis.add
 ##
-##~ a.set :path => "/{project_name}", :format => "json", :description => "Access to a churn project"
+##~ a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
 ##
 ##~ op = a.operations.add
 ##~ op.responseClass = "Project"
-##~ op.set :httpMethod => "GET", :deprecated => false, :nickname => "get_project"
+##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project"
 ##~ op.summary = "Returns a single churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 ##  declaring errors for the operation
-##~ err = op.errorResponses.add 
-##~ err.set :reason => "no project found", :code => 404
+##~ err = op.responseMessages.add 
+##~ err.set :message => "no project found", :code => 404
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
@@ -292,12 +288,12 @@ end
 
 ##~ a = s.apis.add
 ##
-##~ a.set :path => "/projects/add", :format => "json", :description => "Create a new churn project resource"
+##~ a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
 ##
 ##~ op = a.operations.add
-##~ op.set :httpMethod => "POST", :deprecated => false, :nickname => "create_project"
+##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "query"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add' do
   project_name = params['project_name']
