@@ -161,7 +161,7 @@ end
 ##~ a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
 ##~ op = a.operations.add
-##~ op.type = "array"
+##~ op.type = "Project"
 ##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
 ##~ op.summary = "Returns a single commit by commit id and project_path"
 ##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
