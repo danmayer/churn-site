@@ -220,7 +220,7 @@ end
 ##~ a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
 ##
 ##~ op = a.operations.add
-##~ op.type = "void"
+##~ op.type = "Project"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
 ##~ op.summary = "Starts generating churn report against HEAD of project_path"
 ##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
