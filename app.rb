@@ -94,6 +94,22 @@ end
 ##~ root.apiVersion = "1.0"
 ##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
 ##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
+
+##~ s = source2swagger.namespace("churn")
+##~ s.basePath =  swaggerBase
+##~ s.swaggerVersion = "1.2"
+##~ s.apiVersion = "1.0"
+##~ s.produces = ["application/json"]
+##~ s.resourcePath = "/index"
+
+## models
+##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
+##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
+## s.models["FileChange"] = {:id => "FileChange", :properties => {:id => {:type => "string"}, :file_path => {:type => "string"}, :times_changed => {:type => "integer"}}}
+## s.models["Churn"] = {:id => "Churn", :properties => {:id => {:type => "string"}, :changes => {"array" => {:items => { "$ref" => "FileChange"}}}}}
+## s.models["ChurnResults"] = {:id => "ChurnResults", :properties => {:id => {:type => "string"}, :churn => {:type => "Churn"}}}
+##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
+
 # redict to documentation index file
 get '/docs/?' do
   redirect '/docs/index.html'
@@ -113,22 +129,6 @@ get '/api-docs/:api', :provides => [:json] do
   status 200
 end
 
-##~ s = source2swagger.namespace("churn")
-##~ s.basePath =  swaggerBase
-##~ s.swaggerVersion = "1.2"
-##~ s.apiVersion = "1.0"
-##~ s.produces = ["application/json"]
-
-## models
-##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
-##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
-##~ s.models["FileChange"] = {:id => "FileChange", :properties => {:id => {:type => "string"}, :file_path => {:type => "string"}, :times_changed => {:type => "integer"}}}
-##~ s.models["Churn"] = {:id => "Churn", :properties => {:id => {:type => "string"}, :changes => {"array" => {:items => { "$ref" => "FileChange"}}}}}
-##~ s.models["ChurnResults"] = {:id => "ChurnResults", :properties => {:id => {:type => "string"}, :churn => {:type => "Churn"}}}
-##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
-
-
-##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
 ##~ a.set :path => "/index", :produces => ["application/json"], :description => "Access to all of the churned projects."
 ##
