@@ -156,17 +156,17 @@ get '/instructions' do
   erb :instructions
 end
 
-##~ a = s.apis.add
+## a = s.apis.add
 ##
-##~ a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
+## a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
-##~ op = a.operations.add
-##~ op.type = "array"
+## op = a.operations.add
+## op.type = "array"
 ## op.set :items => { "type": "string"}
-##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
-##~ op.summary = "Returns a single commit by commit id and project_path"
-##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-##~ op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+## op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
+## op.summary = "Returns a single commit by commit id and project_path"
+## op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+## op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
