@@ -104,11 +104,16 @@ end
 
 ## models
 ##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
+##
 ##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
+##
 ## s.models["FileChange"] = {:id => "FileChange", :properties => {:id => {:type => "string"}, :file_path => {:type => "string"}, :times_changed => {:type => "integer"}}}
+##
 ## s.models["Churn"] = {:id => "Churn", :properties => {:id => {:type => "string"}, :changes => {"array" => {:items => { "$ref" => "FileChange"}}}}}
+##
 ## s.models["ChurnResults"] = {:id => "ChurnResults", :properties => {:id => {:type => "string"}, :churn => {:type => "Churn"}}}
-##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
+##
+## s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
 
 # redict to documentation index file
 get '/docs/?' do
@@ -223,7 +228,7 @@ end
 ##~ a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
 ##
 ##~ op = a.operations.add
-##~ op.type = {"array" => {:items => { "$ref" => "Project"}}}
+##~ op.type = "Project"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
 ##~ op.summary = "Starts generating churn report against HEAD of project_path"
 ##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
