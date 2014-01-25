@@ -122,7 +122,7 @@ end
 ## models
 ##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
 ##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
-##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => "string"}}}}
+##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
 
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
