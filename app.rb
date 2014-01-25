@@ -87,7 +87,14 @@ before /.*/ do
   end
 end
 
-# redict to index fil
+## swaggerBase = "http://localhost:5000"
+##~ swaggerBase = "http://churn.picoappz.com"
+##~ root = source2swagger.namespace("api-docs")
+##~ root.swaggerVersion = "1.2"
+##~ root.apiVersion = "1.0"
+##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
+##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
+# redict to documentation index file
 get '/docs/?' do
   redirect '/docs/index.html'
 end
@@ -106,23 +113,20 @@ get '/api-docs/:api', :provides => [:json] do
   status 200
 end
 
-## swaggerBase = "http://localhost:5000"
-##~ swaggerBase = "http://churn.picoappz.com"
-##~ root = source2swagger.namespace("api-docs")
-##~ root.swaggerVersion = "1.2"
-##~ root.apiVersion = "1.0"
-##~ root.info = {title: "Churn API", description: "This api generates code churn reports to find volatile code in your project.", termsOfServiceUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt", contact: "danmayer@gmail.com", license: "MIT", licenseUrl: "https://raw2.github.com/danmayer/churn-site/master/license.txt"}
-##~ root.apis.add :path => "/churn", :description => "A churn code metrics api"
-
 ##~ s = source2swagger.namespace("churn")
 ##~ s.basePath =  swaggerBase
 ##~ s.swaggerVersion = "1.2"
 ##~ s.apiVersion = "1.0"
 ##~ s.produces = ["application/json"]
+
 ## models
-##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
 ##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
 ##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
+##~ s.models["FileChange"] = {:id => "FileChange", :properties => {:id => {:type => "string"}, :file_path => {:type => "string"}, :times_changed => {:type => "integer"}}}
+##~ s.models["Churn"] = {:id => "Churn", :properties => {:id => {:type => "string"}, :changes => {"array" => {:items => { "$ref" => "FileChange"}}}}}
+##~ s.models["ChurnResults"] = {:id => "ChurnResults", :properties => {:id => {:type => "string"}, :churn => {:type => "Churn"}}}
+##~ s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
+
 
 ##~ s.resourcePath = "/index"
 ##~ a = s.apis.add
@@ -158,7 +162,6 @@ get '/instructions' do
 end
 
 ## a = s.apis.add
-##
 ## a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
 ## op = a.operations.add
@@ -216,17 +219,15 @@ post '/*/commits/*' do |project_name, commit|
   end
 end
 
-## a = s.apis.add
+##~ a = s.apis.add
+##~ a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
 ##
-## a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
-##
-## op = a.operations.add
-## op.type = "Project"
-## op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
-## op.summary = "Starts generating churn report against HEAD of project_path"
-## op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-## op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :type => "string", :allowMultiple => false, :required => false, :paramType => "query"
-##
+##~ op = a.operations.add
+##~ op.type = {"array" => {:items => { "$ref" => "Project"}}}
+##~ op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
+##~ op.summary = "Starts generating churn report against HEAD of project_path"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :type => "string", :allowMultiple => false, :required => false, :paramType => "query"
 post '/churn/*', :provides => [:html, :json] do |project_path|
   @project      = Project.get_project(project_path)
   if @project
