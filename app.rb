@@ -129,7 +129,8 @@ end
 ##~ a.set :path => "/index", :produces => ["application/json"], :description => "Access to all of the churned projects."
 ##
 ##~ op = a.operations.add
-##~ op.type = "MinProject"
+##~ op.type = {"array" => {:items => { "$ref" => "MinProject"}}}
+##
 ##~ op.set :method => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
 ##~ op.summary = "Returns a list of all the churn projects"  
 ##
@@ -215,16 +216,16 @@ post '/*/commits/*' do |project_name, commit|
   end
 end
 
-##~ a = s.apis.add
+## a = s.apis.add
 ##
-##~ a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
+## a.set :path => "/churn/{project_path}", :produces => ["application/json"], :description => "Starts generating churn report against HEAD of project_path"
 ##
-##~ op = a.operations.add
-##~ op.type = "Project"
-##~ op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
-##~ op.summary = "Starts generating churn report against HEAD of project_path"
-##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-##~ op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :type => "string", :allowMultiple => false, :required => false, :paramType => "query"
+## op = a.operations.add
+## op.type = "Project"
+## op.set :method => "POST", :deprecated => false, :nickname => "churn_project"
+## op.summary = "Starts generating churn report against HEAD of project_path"
+## op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+## op.parameters.add :name => "existing", :description => "If we only need to add commit data as the report already exists", :type => "string", :allowMultiple => false, :required => false, :paramType => "query"
 ##
 post '/churn/*', :provides => [:html, :json] do |project_path|
   @project      = Project.get_project(project_path)
@@ -263,19 +264,19 @@ get '/chart/*' do |project_path|
   end
 end 
 
-##~ a = s.apis.add
+## a = s.apis.add
 ##
-##~ a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
+## a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
 ##
-##~ op = a.operations.add
-##~ op.type = "Project"
-##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project"
-##~ op.summary = "Returns a single churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+## op = a.operations.add
+## op.type = "Project"
+## op.set :method => "GET", :deprecated => false, :nickname => "get_project"
+## op.summary = "Returns a single churn project by project_name"
+## op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 ##  declaring errors for the operation
-##~ err = op.responseMessages.add 
-##~ err.set :message => "no project found", :code => 404
+## err = op.responseMessages.add 
+## err.set :message => "no project found", :code => 404
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
@@ -292,15 +293,15 @@ get '/*', :provides => [:html, :json] do |project_path|
 end
 
 
-##~ a = s.apis.add
+## a = s.apis.add
 ##
-##~ a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
+## a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
 ##
-##~ op = a.operations.add
-##~ op.type = "void"
-##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
-##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
+## op = a.operations.add
+## op.type = "void"
+## op.set :method => "POST", :deprecated => false, :nickname => "create_project"
+## op.summary = "creates a new churn project by project_name"
+## op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add' do
   project_name = params['project_name']
