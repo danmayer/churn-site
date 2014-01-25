@@ -87,7 +87,7 @@ before /.*/ do
   end
 end
 
-## swaggerBase = "http://localhost:5000"
+## swaggerBase = "http://localhost:9292"
 ##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
 ##~ root.swaggerVersion = "1.2"
@@ -105,7 +105,9 @@ end
 ## models
 ##~ s.models["MinProject"] = {:id => "MinProject", :properties => {:name => {:type => "string"}, :project_url => {:type => "string"}}}
 ##
-##~ s.models["Project"] = {:id => "Project", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :commits => {:type => "array", :items => {:commit_url => {:type => "string"}}}}}
+##~ s.models["CommitUrl"] = {:id => "CommitUrl", :properties => {:commit_url => {:type => "string"}}}
+##
+##~ s.models["Project"] = {:id => "Project", :properties => {:name => {:type => "string"}, :commits => {:type => "array", :items => {"$ref" => "CommitUrl"}}}}
 ##
 ## s.models["FileChange"] = {:id => "FileChange", :properties => {:id => {:type => "string"}, :file_path => {:type => "string"}, :times_changed => {:type => "integer"}}}
 ##
@@ -113,7 +115,7 @@ end
 ##
 ## s.models["ChurnResults"] = {:id => "ChurnResults", :properties => {:id => {:type => "string"}, :churn => {:type => "Churn"}}}
 ##
-## s.models["Commit"] = {:id => "Commit", :properties => {:id => {:type => "string"}, :name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
+##~ s.models["Commit"] = {:id => "Commit", :properties => {:name => {:type => "string"}, :project_name => {:type => "string"}, :churn_results => {:type => "string"}}}
 
 # redict to documentation index file
 get '/docs/?' do
@@ -135,17 +137,15 @@ get '/api-docs/:api', :provides => [:json] do
 end
 
 ##~ a = s.apis.add
-##~ a.set :path => "/index", :produces => ["application/json"], :description => "Access to all of the churned projects."
+##~ a.set :path => "/index", :produces => ["application/json"], :description => "Collection of churned projects."
 ##
 ##~ op = a.operations.add
-##~ op.type = {"array" => {:items => { "$ref" => "MinProject"}}}
+##~ op.type = "array"
+##~ op.items = { "$ref" => "MinProject"}
 ##
 ##~ op.set :method => "GET", :summary => "Returns all of the churn projects.", :deprecated => false, :nickname => "list_churn"
-##~ op.summary = "Returns a list of all the churn projects"  
-##
-##  declaring errors for the operation
-##~ err = op.errorResponses.add 
-##~ err.set :reason => "no projects found", :code => 404
+##~ op.summary = "Returns a list of all the churn projects"
+
 ["/", "/index"].each do |path|
   get path, :provides => [:html, :json] do
     @projects = Project.projects
@@ -166,16 +166,16 @@ get '/instructions' do
   erb :instructions
 end
 
-## a = s.apis.add
-## a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
+##~ a = s.apis.add
+##~ a.set :path => "/{project_path}/commits/{commit}", :produces => ["application/json"], :description => "Access to a projects single commit data"
 ##
-## op = a.operations.add
-## op.type = "array"
-## op.set :items => { "type": "string"}
-## op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
-## op.summary = "Returns a single commit by commit id and project_path"
-## op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-## op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op = a.operations.add
+##~ op.type = "array"
+##~ op.items = { "$ref" => "Commit"}
+##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project_commit"
+##~ op.summary = "Returns a single commit by commit id and project_path"
+##~ op.parameters.add :name => "project_path", :description => "The project_name for which this commit belongs to", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
+##~ op.parameters.add :name => "commit", :description => "The commit id which points to this commit data", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
@@ -270,19 +270,18 @@ get '/chart/*' do |project_path|
   end
 end 
 
-## a = s.apis.add
+##~ a = s.apis.add
+##~ a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
 ##
-## a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
+##~ op = a.operations.add
+##~ op.type = "Project"
+##~ op.set :method => "GET", :deprecated => false, :nickname => "get_project"
+##~ op.summary = "Returns a single churn project by project_name"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
-## op = a.operations.add
-## op.type = "Project"
-## op.set :method => "GET", :deprecated => false, :nickname => "get_project"
-## op.summary = "Returns a single churn project by project_name"
-## op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-##
-##  declaring errors for the operation
-## err = op.responseMessages.add 
-## err.set :message => "no project found", :code => 404
+## Declaring errors for the operation
+##~ err = op.responseMessages.add 
+##~ err.set :message => "no project found", :code => 404
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
   if @project
@@ -292,22 +291,24 @@ get '/*', :provides => [:html, :json] do |project_path|
     end
   else
     if project_path.strip.length > 0 && project_path!='favicon.ico'
-      flash[:error] = "existing project not found, please add it"
+      respond_to do |format|
+        format.json { halt 404, json({ message: "no project found" }) }
+        format.html { flash[:error] = "existing project not found, please add it" }
+      end
     end
     redirect '/'
   end
 end
 
 
-## a = s.apis.add
+##~ a = s.apis.add
+##~ a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
 ##
-## a.set :path => "/projects/add", :produces => ["application/json"], :description => "Create a new churn project resource"
-##
-## op = a.operations.add
-## op.type = "void"
-## op.set :method => "POST", :deprecated => false, :nickname => "create_project"
-## op.summary = "creates a new churn project by project_name"
-## op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
+##~ op = a.operations.add
+##~ op.type = "string"
+##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
+##~ op.summary = "creates a new churn project by project_name"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add' do
   project_name = params['project_name']
@@ -332,7 +333,10 @@ post '/projects/add' do
   else
     flash[:notice] = 'project name required'
   end
-  redirect '/'
+  respond_to do |format|
+    format.json { flash[:notice] || flash[:error] }
+    format.html { redirect '/' }
+  end
 end
 
 #handles github post push webhook calls
