@@ -308,11 +308,11 @@ end
 ##~ op.type = "string"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "form"
 ##
 post '/projects/add', :provides => [:html, :json] do
   project_name = params['project_name']
-  #fix starting with a slash if they did that
+  #fix starting with a slash if cleint passed with a slash
   project_name = project_name[1...project_name.length] if project_name[0]=='/'
   if project_name
     begin
