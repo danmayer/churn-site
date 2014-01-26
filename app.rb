@@ -309,7 +309,7 @@ end
 ##~ op.type = "string"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "form"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add*', :provides => [:html, :json] do
   puts "*"*60
