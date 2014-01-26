@@ -310,7 +310,7 @@ end
 ##~ op.summary = "creates a new churn project by project_name"
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
-post '/projects/add' do
+post '/projects/add', :provides => [:html, :json] do
   project_name = params['project_name']
   #fix starting with a slash if they did that
   project_name = project_name[1...project_name.length] if project_name[0]=='/'
