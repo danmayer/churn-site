@@ -85,6 +85,9 @@ before /.*/ do
     request.accept.unshift('application/json')
     request.path_info = request.path_info.gsub(/.json$/,'')
   end
+
+end
+
 end
 
 ## swaggerBase = "http://localhost:9292"
@@ -308,9 +311,16 @@ end
 ##~ op.type = "string"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "form"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add', :provides => [:html, :json] do
+  # #allow for json body posts
+  # request.body.rewind
+  # request_payload = JSON.parse request.body.read rescue nil
+  # if request_payload
+  #  params = request_payload
+  # end
+
   project_name = params['project_name']
   #fix starting with a slash if cleint passed with a slash
   project_name = project_name[1...project_name.length] if project_name[0]=='/'
