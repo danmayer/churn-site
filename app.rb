@@ -309,9 +309,9 @@ end
 ##~ op.type = "string"
 ##~ op.set :method => "POST", :deprecated => false, :nickname => "create_project"
 ##~ op.summary = "creates a new churn project by project_name"
-##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "body"
+##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "form"
 ##
-post '/projects/add', :provides => [:html, :json] do
+post '/projects/add*', :provides => [:html, :json] do
   # allow for json body posts
   request.body.rewind
   json_body = request.body.read
