@@ -88,8 +88,6 @@ before /.*/ do
 
 end
 
-end
-
 ## swaggerBase = "http://localhost:9292"
 ##~ swaggerBase = "http://churn.picoappz.com"
 ##~ root = source2swagger.namespace("api-docs")
