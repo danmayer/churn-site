@@ -312,10 +312,7 @@ end
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be created", :type => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##
 post '/projects/add*', :provides => [:html, :json] do
-  puts "*"*60
-  puts params.inspect
-
-  project_name = params['project_name']
+  project_name = params && params['project_name']
   #fix starting with a slash if cleint passed with a slash
   project_name = project_name[1...project_name.length] if project_name[0]=='/'
   if project_name
