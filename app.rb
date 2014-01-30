@@ -177,10 +177,6 @@ end
 ##~ op.summary = "Returns a single commit by commit id and project_path"
 ##~ op.parameters.add :name => "projectPath", :description => "The project_name for which this commit belongs to", :type => "string", :required => true, :paramType => "path"
 ##~ op.parameters.add :name => "commitId", :description => "The commit id which points to this commit data", :type => "string", :required => true, :paramType => "path"
-##
-
-##~ op.parameters.add :name => "project_path", :description => "The project_name for which a churn report will be generated against", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
-
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
   @commit       = Commit.get_commit(@project.name, commit)
