@@ -132,9 +132,14 @@ end
 
 # returns the api docs for each path
 get '/api-docs/:api', :provides => [:json] do
-  res = File.read(File.join('public', 'api', "#{params[:api].to_s}.json"))
-  body res
-  status 200
+  if File.exists?(File.join('public', 'api', "#{params[:api].to_s}.json"))
+    res = File.read(File.join('public', 'api', "#{params[:api].to_s}.json"))
+    body res
+    status 200
+  else
+    body = "api endpoint doesn't exist"
+    status 404
+  end
 end
 
 ##~ a = s.apis.add
