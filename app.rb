@@ -314,15 +314,23 @@ post '/projects/add*', :provides => [:html, :json] do
   project_name = params && params['project_name']
   #fix starting with a slash if cleint passed with a slash
   project_name = project_name[1...project_name.length] if project_name[0]=='/'
-  if project_name
+  if project_name && project_name.length > 0
     begin
       project_data = Octokit.repo project_name
-      gh_commit = Octokit.commits(project_name).first
-      commit = gh_commit['sha']
-      commit_data = gh_commit
-      find_or_create_project(project_name, project_data, commit, commit_data)
-      
-      flash[:notice] = "project #{project_name} created"
+      if project_data
+        gh_commits = Octokit.commits(project_name)
+        if gh_commits.any?
+          gh_commit = gh_commits.first
+          commit = gh_commit['sha']
+          commit_data = gh_commit
+          find_or_create_project(project_name, project_data, commit, commit_data)
+          flash[:notice] = "project #{project_name} created"
+        else
+          flash[:error] = "no commits found on github for #{project_name}"
+        end
+      else
+        flash[:error] = "project #{project_name} couldn't be found on github"
+      end
     rescue RestClient::InternalServerError, RestClient::ResourceNotFound => error
       error_msg = "error adding #{project_name} error #{error}"
       puts error_msg
