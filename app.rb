@@ -184,7 +184,7 @@ end
 ##~ op.parameters.add :name => "commitId", :description => "The commit id which points to this commit data", :type => "string", :required => true, :paramType => "path"
 get '/*/commits/*', :provides => [:html, :json] do |project_path, commit|
   @project      = Project.get_project(project_path)
-  @commit       = Commit.get_commit(@project.name, commit)
+  @commit       = Commit.get_commit(@project.name, commit) if @project
   if @project && @commit
     respond_to do |format|
       format.json { @commit.as_hash(request).to_json }
