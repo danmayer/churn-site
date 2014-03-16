@@ -44,8 +44,10 @@ It displays data like:
 * reduce dependancies and make it easier for people to run churn-site 
 * setup heroku cron job to run rake tasks that calculates and caches avgs across all projects
 * clean up / refactoring
-* test coverage
+* better test coverage
 * better var management... (using dotenv to manage vars now follow https://devcenter.heroku.com/articles/config-vars for best env var management)
+* query the most popular ruby projects on GH and run them through churn
+  * https://github.com/search?l=ruby&q=stars%3A%3E3&s=forks&type=Repositories 
 
 ## Contributing
 

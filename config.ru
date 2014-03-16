@@ -2,16 +2,7 @@ require 'sinatra'
 require 'coverband'
 require 'statsd-ruby'
 
-Coverband.configure do |config|
-  config.root              = Dir.pwd
-  config.redis             = Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1)
-  config.root_paths        = ['/app/']
-  config.ignore            = ['vendor']
-  config.percentage        = 60.0
-  config.stats             = Statsd.new('utils.picoappz.com', 8125)
-  config.verbose           = true
-end
-
+Coverband.configure
 use Coverband::Middleware
 
 require './app'

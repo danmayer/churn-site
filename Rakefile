@@ -35,22 +35,21 @@ task :swagger do
   system 'bundle exec source2swagger -f app.rb -c "##~" -o public/api'
 end
 
-Coverband.configure do |config|
-  config.redis             =  Redis.new(:host => 'utils.picoappz.com', :port => 49182, :db => 1)
-  config.coverage_baseline = JSON.parse(File.read('./tmp/coverband_baseline.json')) if File.exists?('./tmp/coverband_baseline.json')
-  config.root_paths        = ['/app/']
-  config.ignore            = ['vendor']
+desc "loads env"
+task :environment do
+  require 'sinatra'
+  require './app.rb'
 end
 
-desc "report unused lines"
-task :coverband do
-  Coverband::Reporter.report
-end
+Coverband.configure
+require 'coverband/tasks'
 
-desc "get coverage baseline"
-task :coverband_baseline do
-  Coverband::Reporter.baseline {
-    require 'sinatra'
-    require './app.rb'
-  }
+namespace :coverband do
+  desc "get coverage baseline"
+  task :baseline_app do
+    Coverband::Reporter.baseline {
+      require 'sinatra'
+      require './app.rb'
+    }
+  end
 end
