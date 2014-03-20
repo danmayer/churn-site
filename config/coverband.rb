@@ -14,7 +14,8 @@ Coverband.configure do |config|
   config.coverage_baseline = baseline
   config.root_paths        = ['/app/']
   config.ignore            = ['vendor']
-  config.percentage        = 60.0
+  config.percentage        = 85.0
+  config.startup_delay     = 2
   if defined? Statsd
     config.stats             = Statsd.new('utils.picoappz.com', 8125)
   end
