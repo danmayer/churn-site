@@ -15,7 +15,7 @@ gem 'activesupport'
 gem 'airbrake'
 gem 'churn', '0.0.32'
 gem 'dotenv-rails'
-gem 'coverband', '0.1.0.pre'
+gem 'coverband', '0.1.0.preRC1'
 gem 'coverband_ext'
 gem "statsd-ruby"
 gem 'source2swagger'
