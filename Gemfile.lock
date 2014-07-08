@@ -7,8 +7,6 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    active_support (3.0.0)
-      activesupport (= 3.0.0)
     activesupport (3.0.0)
     addressable (2.3.4)
     airbrake (3.1.14)
@@ -152,7 +150,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_support
+  activesupport
   addressable
   airbrake
   better_errors
