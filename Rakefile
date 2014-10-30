@@ -56,6 +56,7 @@ end
 
 require 'resque'
 require './lib/redis_initializer'
+require './lib/background_churn'
 require 'resque/tasks'
 
 task "resque:setup" do
