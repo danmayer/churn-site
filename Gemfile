@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
-ruby "1.9.3"
+ruby "2.0.0"
 gem 'rake'
 gem 'sinatra'
 gem 'json'
 gem 'sinatra-flash'
 gem 'sinatra-contrib'
 gem 'redis'
+gem 'resque'
 gem 'rest-client'
 gem 'addressable'
 gem 'fog'

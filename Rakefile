@@ -53,3 +53,9 @@ namespace :coverband do
     }
   end
 end
+
+require 'resque/tasks'
+
+task "resque:setup" do
+      ENV['QUEUE'] = '*'
+end

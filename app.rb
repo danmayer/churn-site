@@ -20,6 +20,7 @@ Dotenv.load ".env.#{DEFAULT_ENV}", '.env'
 require './lib/rack_catcher'
 require './lib/redis_initializer'
 require './lib/server-files'
+require './lib/background_churn'
 require './models/project'
 require './models/commit'
 require './models/churn_result'
@@ -165,6 +166,7 @@ end
 end
 
 get '/about' do
+  Resque.enqueue(BackgroundChurn, 'about')
   erb :about
 end
 

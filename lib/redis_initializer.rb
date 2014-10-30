@@ -9,6 +9,9 @@ REDIS = if ENV['RACK_ENV']=='production'
           Redis.new(:host => '127.0.0.1', :port => 6379)
         end
 
+Resque.redis = REDIS
+Resque.redis.namespace = "resque:churn"
+
 class UsageCount
   
   def self.increase

@@ -1,4 +1,4 @@
-.rvmrc
+B.rvmrc
 #I want a way to add the directory and one file, but ignore all files inside the directory
 tmp/**
 web/tmp/**
@@ -16,3 +16,4 @@ prod.env
 .env.test
 .env.development
 coverage
+.ruby-version
