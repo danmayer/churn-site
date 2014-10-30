@@ -29,8 +29,7 @@ class BackgroundChurn
   end
 
   def churn_project
-    statsd = Statsd.new('utils.picoappz.com', 8125)
-    statsd.increment 'churned.project'
+    REDIS.incr('background:job')
     #Dir.mktmpdir do |tmpdir|
     #  tmpfile = File.join(tmpdir, @original_file.key)
     #
