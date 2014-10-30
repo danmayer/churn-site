@@ -54,6 +54,8 @@ namespace :coverband do
   end
 end
 
+require 'resque'
+require './lib/redis_initializer'
 require 'resque/tasks'
 
 task "resque:setup" do
