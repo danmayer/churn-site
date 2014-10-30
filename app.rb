@@ -167,7 +167,7 @@ end
 end
 
 get '/about' do
-  Resque.enqueue(BackgroundChurn, 'about')
+  #Resque.enqueue(BackgroundChurn, 'about')
   erb :about
 end
 
