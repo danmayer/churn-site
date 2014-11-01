@@ -1,4 +1,5 @@
 require 'resque/errors'
+require 'resque/plugins/resque_heroku_autoscaler'
 
 module RetriedJob
   def on_failure_retry(e, *args)
@@ -10,6 +11,7 @@ end
 
 class BackgroundChurn
   extend RetriedJob
+  extend Resque::Plugins::HerokuAutoscaler
 
   attr_reader :originals_directory, :watermarked_directory, :connection, :original_file
   @queue = :churn
