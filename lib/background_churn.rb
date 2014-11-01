@@ -1,7 +1,7 @@
 require 'resque/errors'
 require 'resque/plugins/resque_heroku_autoscaler'
 
-if (Rails.env == 'development')
+if (ENV['RACK_ENV'] == 'development')
   Resque::Plugins::HerokuAutoscaler.config do |c|
     c.scaling_disabled = true
   end
