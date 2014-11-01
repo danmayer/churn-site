@@ -1,6 +1,12 @@
 require 'resque/errors'
 require 'resque/plugins/resque_heroku_autoscaler'
 
+if (Rails.env == 'development')
+  Resque::Plugins::HerokuAutoscaler.config do |c|
+    c.scaling_disabled = true
+  end
+end
+
 module RetriedJob
   def on_failure_retry(e, *args)
     puts "Performing #{self} caused an exception (#{e}). Retrying..."
