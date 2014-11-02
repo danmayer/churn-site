@@ -5,8 +5,8 @@ GIT
     leader (0.0.1)
 
 GIT
-  remote: https://github.com/ajmurmann/resque-heroku-autoscaler.git
-  revision: bc8a5219bbdc61157c08677146c9aa3ebe52f172
+  remote: https://github.com/markaschneider/resque-heroku-autoscaler.git
+  revision: a6a18efac1db666672954ebbe30151204358c7ce
   specs:
     resque-heroku-autoscaler (0.2.3)
       activesupport
