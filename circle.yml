@@ -12,9 +12,9 @@ test:
     - PORT=3000 docker run -d -p 3000:3000 danmayer/churn-site bash -c "/usr/bin/redis-server & bundle exec unicorn -p 3000 -c ./unicorn.rb"; sleep 10
     - curl --retry 10 --retry-delay 5 -v http://localhost:3000/instructions
 
-#deployment:
-#  hub:
-#    branch: master
-#    commands:
-#      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-#      - docker push circleci/elasticsearch
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push danmayer/churn-site
