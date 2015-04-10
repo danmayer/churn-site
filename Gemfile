@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby "2.0.0"
+ruby "2.2.0"
 gem 'rake'
 gem 'sinatra'
 gem 'json'
@@ -22,9 +22,11 @@ gem 'coverband_ext'
 gem "statsd-ruby", :require => "statsd"
 gem 'source2swagger'
 gem "sinatra-cross_origin"
+gem 'test-unit'
 
 group :production do
   gem 'unicorn'
+  #gem 'puma'
   gem 'newrelic_rpm'
 end
 
