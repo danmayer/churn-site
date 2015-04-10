@@ -2,8 +2,8 @@ machine:
   services:
     - docker
 
-#dependencies:
-#  override:
+dependencies:
+  override:
     - docker info
     - docker build -t danmayer/churn-site .
 
