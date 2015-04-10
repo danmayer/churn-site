@@ -14,6 +14,8 @@ RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 # for a JS runtime
 RUN apt-get install -y nodejs
 
+RUN apt-get install -y redis-server
+
 ENV APP_HOME /myapp
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
