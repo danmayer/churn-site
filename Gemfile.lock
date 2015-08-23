@@ -215,3 +215,6 @@ DEPENDENCIES
   statsd-ruby
   test-unit
   unicorn
+
+BUNDLED WITH
+   1.10.2

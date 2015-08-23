@@ -79,6 +79,7 @@ helpers do
 end
 
 before /.*/ do
+  redirect "index.html", 301
   if request.host.match(/herokuapp.com/)
     redirect request.url.gsub("churn-site.herokuapp.com",'churn.picoappz.com'), 301
   end
@@ -158,7 +159,7 @@ end
   get path, :provides => [:html, :json] do
     @projects = Project.projects
     respond_to do |format|
-      format.json { 
+      format.json {
         Project.projects_as_json(@projects, request)
       }
       format.html { erb :index }
@@ -276,7 +277,7 @@ get '/chart/*' do |project_path|
     flash[:error] = 'project to chart not found'
     redirect '/'
   end
-end 
+end
 
 ##~ a = s.apis.add
 ##~ a.set :path => "/{project_name}", :produces => ["application/json"], :description => "Access to a churn project"
@@ -288,7 +289,7 @@ end
 ##~ op.parameters.add :name => "project_name", :description => "The project_name of the churn project to be returned", :type => "string", :allowMultiple => false, :required => true, :paramType => "path"
 ##
 ## Declaring errors for the operation
-##~ err = op.responseMessages.add 
+##~ err = op.responseMessages.add
 ##~ err.set :message => "no project found", :code => 404
 get '/*', :provides => [:html, :json] do |project_path|
   @project = Project.get_project(project_path)
@@ -383,14 +384,14 @@ def receive_churn_client_payload
   if results
     project_name  = results['name']
     commit        = results['revision']
-    churn_results = results['data'] 
+    churn_results = results['data']
     begin
       project_data = Octokit.repo project_name
     rescue Octokit::NotFound
       #non public project, ignore other project data besides the name
       project_data = {}
     end
-    commit_data = 
+    commit_data =
       begin
         gh_commit = Octokit.commits(project_name, nil, :sha => commit).first
       rescue Octokit::NotFound, Octokit::BadGateway
@@ -436,10 +437,10 @@ def forward_to_deferred_server(project, commit, options = {})
   begin
     request_timeout = options.fetch(:timeout){ 6 }
     request_open_timeout    = options.fetch(:open_timeout){ 6 }
-    resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT, 
-                                        :timeout => request_timeout, 
+    resource = RestClient::Resource.new(DEFERRED_SERVER_ENDPOINT,
+                                        :timeout => request_timeout,
                                         :open_timeout => request_open_timeout)
-    
+
     resource.post(:signature => DEFERRED_SERVER_TOKEN,
                   :project => project,
                   :commit => commit,
